@@ -316,7 +316,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\anderson.rodrigues\\Projects\\NextJs\\nexauto\\src\\prisma\\client",
+      "value": "/home/anderson/Projetos/nextjs/nexauto/src/prisma/client",
       "fromEnvVar": null
     },
     "config": {
@@ -325,16 +325,16 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
+        "value": "debian-openssl-3.0.x",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\anderson.rodrigues\\Projects\\NextJs\\nexauto\\prisma\\schema.prisma",
+    "sourceFilePath": "/home/anderson/Projetos/nextjs/nexauto/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../../../prisma",
@@ -348,7 +348,7 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "mysql://root:16050912@localhost:3306/nexauto"
+        "value": "mysql://root:16050912@localhost:3306/nextauto"
       }
     }
   },
@@ -392,8 +392,8 @@ exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
 // file annotations for bundling tools to include these files
-path.join(__dirname, "query_engine-windows.dll.node");
-path.join(process.cwd(), "src/prisma/client/query_engine-windows.dll.node")
+path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node");
+path.join(process.cwd(), "src/prisma/client/libquery_engine-debian-openssl-3.0.x.so.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "src/prisma/client/schema.prisma")

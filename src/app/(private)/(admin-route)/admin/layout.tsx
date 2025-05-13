@@ -27,7 +27,7 @@ export default async function AdminLayout({ children }: {
             <AppSidebar />
             <main className='w-full flex flex-col'>
                 <HeaderAdm />
-                <div className='flex-grow'>
+                <div className='flex-grow p-6'>
                     {children}
                 </div>
                 <FooterAdm />
