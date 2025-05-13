@@ -1,6 +1,4 @@
 import React from 'react'
-import { DataTable } from '../../components/data-table'
-import { columns } from './columns'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,11 +9,12 @@ import {
 } from "@/src/components/ui/breadcrumb"
 import { Building2 } from 'lucide-react'
 import { Card } from '@/src/components/ui/card'
+import EditForm from '../../forms/edit-form'
 import { Organization } from '@/src/types/organization'
 
-async function getOrganizations(): Promise<Organization[]> {
+async function getOrganization(id: string): Promise<Organization[]> {
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/organization`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/organization/${id}`, {
     cache: 'no-store'
   });
 
@@ -25,9 +24,14 @@ async function getOrganizations(): Promise<Organization[]> {
   return res.json();
 }
 
-export default async function Organizations() {
+export default async function EditOrganization({
+  params,
+}: {
+   params: Promise<{ id: string }>
+}) {
+   const { id } = await params;
 
-  const organizations = await getOrganizations();
+   const organization = await getOrganization(id);
 
   return (
     <div>
@@ -39,18 +43,22 @@ export default async function Organizations() {
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                <BreadcrumbLink href="/admin">Home</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbPage>Organizações</BreadcrumbPage>
+                <BreadcrumbLink href="/admin/organizacoes">Organizações</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>Editar organização </BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         </div>
       </div>
       <Card className='p-4'>
-        <DataTable columns={columns} data={organizations} label="Organização" link='/admin/organizations/add-organization' filter='name' />
+        <EditForm organization={organization} />
       </Card>
     </div>
   )

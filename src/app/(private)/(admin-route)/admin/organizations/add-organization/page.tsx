@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import {
   Breadcrumb,
@@ -8,11 +9,14 @@ import {
   BreadcrumbSeparator,
 } from "@/src/components/ui/breadcrumb"
 import { Building2 } from 'lucide-react'
+import { Card } from '@/src/components/ui/card'
+import AddForm from '../forms/add-form'
+
 export default function AddOrganization() {
 
   return (
     <div>
-              <div className='flex items-center justify-between mb-6'>
+      <div className='flex items-center justify-between mb-6'>
         <div className='flex items-center justify-left gap-2'>
           <Building2 /> Organizações
         </div>
@@ -20,20 +24,23 @@ export default function AddOrganization() {
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                <BreadcrumbLink href="/admin">Home</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink href="/components">Components</BreadcrumbLink>
+                <BreadcrumbLink href="/admin/organizacoes">Organizações</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+                <BreadcrumbPage>Adicionar organização </BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         </div>
       </div>
+      <Card className='p-4'>
+        <AddForm />
+      </Card>
     </div>
   )
 }

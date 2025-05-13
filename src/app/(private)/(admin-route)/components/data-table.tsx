@@ -24,15 +24,23 @@ import {
 import React from "react"
 import { Input } from "@/src/components/ui/input"
 import { Button } from "@/src/components/ui/button"
+import Link from "next/link"
+import { Plus } from "lucide-react"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
+    label: string
+    link: string
+    filter:string
 }
 
 export function DataTable<TData, TValue>({
     columns,
     data,
+    label,
+    link,
+    filter
 }: DataTableProps<TData, TValue>) {
 
     const [sorting, setSorting] = React.useState<SortingState>([])
@@ -66,14 +74,18 @@ export function DataTable<TData, TValue>({
         <div className="w-full">
             <div className="flex items-center justify-between py-4">
                 <Input
-                    placeholder="Filter emails..."
-                    value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+                    placeholder={`Filtrar ${label}...`}
+                    value={(table.getColumn(filter)?.getFilterValue() as string) ?? ""}
                     onChange={(event) =>
-                        table.getColumn("email")?.setFilterValue(event.target.value)
+                        table.getColumn(filter)?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"
                 />
-                <Button>Novo</Button>
+                <Button asChild>
+                    <Link href={link}>
+                    <Plus />{label}
+                    </Link>
+                    </Button>
             </div>
             <div className="rounded-md border">
                 <Table>
