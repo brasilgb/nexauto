@@ -18,12 +18,12 @@ async function getOrganizations(): Promise<Organization[]> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/organization`, {
     cache: 'no-store'
   });
-
+ 
   if (!res.ok) {
     throw new Error(`Erro ao listar organizações: ${res.status}`);
   }
   return res.json();
-}
+};
 
 export default async function Organizations() {
 
@@ -39,7 +39,7 @@ export default async function Organizations() {
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                <BreadcrumbLink href="/admin">Home</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
@@ -49,6 +49,7 @@ export default async function Organizations() {
           </Breadcrumb>
         </div>
       </div>
+
       <Card className='p-4'>
         <DataTable columns={columns} data={organizations} label="Organização" link='/admin/organizations/add-organization' filter='name' />
       </Card>

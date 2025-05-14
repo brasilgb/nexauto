@@ -9,24 +9,43 @@ import moment from "moment"
 import { Badge } from "@/src/components/ui/badge"
 import { maskCnpj } from "@/src/lib/utils"
 import Link from "next/link"
+import { Company } from "@/src/types/company"
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 
-export const columns: ColumnDef<Organization>[] = [
+export const columns: ColumnDef<Company>[] = [
   {
-    accessorKey: "name",
+    accessorKey: "Organization.name",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Nome
+          Organização
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
     },
+  },
+  {
+    accessorKey: "subname",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Filial
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
+  },
+  {
+    accessorKey: "subnumber",
+    header: () => <div className="text-left">N° Filial</div>,
   },
   {
     accessorKey: "cnpj",
@@ -47,6 +66,10 @@ export const columns: ColumnDef<Organization>[] = [
         <span>{maskCnpj(fcnpj)}</span>
       )
     }
+  },
+  {
+    accessorKey: "telefone",
+    header: () => <div className="text-left">Telefone</div>,
   },
   {
     accessorKey: "status",
@@ -82,18 +105,15 @@ export const columns: ColumnDef<Organization>[] = [
   {
     accessorKey: " ",
     cell: ({ row }) => {
-      const orgs = row.original;
+      const comp = row.original;
       return (
         <div className="flex items-center justify-end gap-2">
-          <Button className={`${buttonVariants({ variant: "destructive" })} bg-indigo-500 hover:bg-indigo-500/90`} size="icon" title="Limpar dados">
-          <DatabaseBackup />
-          </Button>
           <Button className={`${buttonVariants({ variant: "destructive" })} bg-orange-500 hover:bg-orange-500/90`} size="icon" asChild title="Editar organização">
-            <Link href={`/admin/organizations/edit-organization/${orgs.id}`}>
+            <Link href={`/admin/companies/edit-company/${comp.id}`}>
               <Edit />
             </Link>
           </Button>
-          <DeleteAlertDialog deleteId={orgs.id} module="organization" route="/admin/organizations" name="organização" />
+          <DeleteAlertDialog deleteId={comp.id} module="company" route="/admin/companies" name="filial" />
         </div>
       )
     }

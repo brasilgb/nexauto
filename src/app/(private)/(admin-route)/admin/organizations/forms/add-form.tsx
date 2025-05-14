@@ -9,11 +9,12 @@ import { Switch } from '@/src/components/ui/switch';
 import { Button } from '@/src/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/src/components/ui/form';
 import { DialogFooter } from '@/src/components/ui/dialog';
-import { Loader, Save } from 'lucide-react';
+import { Check, Loader, Save } from 'lucide-react';
 import { maskCnpj } from '@/src/lib/utils';
 import { isCNPJ } from 'validation-br'
 import { useAppContext } from '@/src/contexts/AppContext';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 
 const formSchema = z.object({
@@ -38,7 +39,7 @@ export default function AddForm() {
   });
 
   const onSubmit = async (data: FormData) => {
-
+    setLoading(true);
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/organization/`, {
       method: 'POST',
       headers: {
@@ -55,6 +56,19 @@ export default function AddForm() {
     if (user && response.ok) {
       setLoading(false);
       form.reset()
+      toast(
+        "Organização cadastrada", {
+        description: "Organização cadastrada com sucesso!",
+        classNames: {
+          toast: '!bg-green-700 !border-2 !border-white',
+          title: '!text-white text-base',
+          description: '!text-gray-200',
+          closeButton: '!bg-green-600 !text-white',
+        },
+        icon: <Check className='h-5 w-5 !text-gray-50' />,
+        closeButton: true,
+        position: 'top-right'
+      });
       router.replace('/admin/organizations')
     }
   };
@@ -113,7 +127,7 @@ export default function AddForm() {
         </div>
         <DialogFooter className="border-t pt-4">
           <Button type="submit" className="cursor-pointer" variant="default">
-            <Save />{loading ? <Loader className="animate-spin" /> : 'Salvar'}
+            {loading ? <Loader className="animate-spin" /> : <Save />}Salvar
           </Button>
         </DialogFooter>
       </form>

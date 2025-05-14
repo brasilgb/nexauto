@@ -343,11 +343,12 @@ const config = {
     "db"
   ],
   "activeProvider": "mysql",
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "mysql://root:16050912@localhost:3306/nextauto"
+        "value": null
       }
     }
   },

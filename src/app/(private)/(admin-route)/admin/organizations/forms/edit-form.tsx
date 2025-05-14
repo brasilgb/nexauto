@@ -9,12 +9,13 @@ import { Switch } from '@/src/components/ui/switch';
 import { Button } from '@/src/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/src/components/ui/form';
 import { DialogFooter } from '@/src/components/ui/dialog';
-import { Loader, Save } from 'lucide-react';
+import { Check, Loader, Save, X } from 'lucide-react';
 import { maskCnpj } from '@/src/lib/utils';
 import { isCNPJ } from 'validation-br'
 import { useAppContext } from '@/src/contexts/AppContext';
 import { useRouter } from 'next/navigation';
 import { Organization } from '@/src/types/organization';
+import { toast } from 'sonner';
 
 const formSchema = z.object({
   name: z.string().min(1, { message: 'O nome deve ser preenchido!' }),
@@ -26,7 +27,7 @@ type FormData = z.infer<typeof formSchema>;
 export const dynamic = 'force-dynamic';
 
 
-export default function EditForm({organization}: any) {
+export default function EditForm({ organization }: any) {
 
   const { loading, setLoading } = useAppContext();
   const router = useRouter();
@@ -40,9 +41,9 @@ export default function EditForm({organization}: any) {
   });
 
   const onSubmit = async (data: FormData) => {
-
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/organization/`, {
-      method: 'POST',
+    setLoading(true);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/organization/${organization.id}`, {
+      method: 'PUT',
       headers: {
         'Content-type': 'Application/json',
         // Authorization: `Bearer ${session?.user?.token}`
@@ -56,7 +57,19 @@ export default function EditForm({organization}: any) {
     const user = await response.json();
     if (user && response.ok) {
       setLoading(false);
-      form.reset()
+      toast(
+        "Organização alterada", {
+        description: "Organização alterada com sucesso!",
+        classNames: {
+          toast: '!bg-green-700 !border-2 !border-white',
+          title: '!text-white text-base',
+          description: '!text-gray-200',
+          closeButton: '!bg-green-600 !text-white',
+        },
+        icon: <Check className='h-5 w-5 !text-gray-50' />,
+        closeButton: true,
+        position: 'top-right'
+      });
       router.replace('/admin/organizations')
     }
   };
@@ -115,7 +128,7 @@ export default function EditForm({organization}: any) {
         </div>
         <DialogFooter className="border-t pt-4">
           <Button type="submit" className="cursor-pointer" variant="default">
-            <Save />{loading ? <Loader className="animate-spin" /> : 'Salvar'}
+            {loading ? <Loader className="animate-spin" /> : <Save />}Salvar
           </Button>
         </DialogFooter>
       </form>

@@ -4,6 +4,7 @@ import { AppSidebar } from '../components/app-sidebar';
 import { cookies } from 'next/headers';
 import HeaderAdm from '../components/header-adm';
 import FooterAdm from '../components/footer-adm';
+import { Toaster } from '@/src/components/ui/sonner';
 
 export default async function AdminLayout({ children }: {
     children: ReactNode;
@@ -32,6 +33,7 @@ export default async function AdminLayout({ children }: {
                 </div>
                 <FooterAdm />
             </main>
+            <Toaster />
         </SidebarProvider>
     )
 }
