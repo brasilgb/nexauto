@@ -8,33 +8,34 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/src/components/ui/breadcrumb"
-import { Building } from 'lucide-react'
+import { Building, SlidersHorizontal } from 'lucide-react'
 import { Card, CardContent, CardFooter } from '@/src/components/ui/card'
-import { Company } from '@/src/types/company'
 import { SettingForm } from './setting-form'
 import Image from 'next/image';
+import { Setting } from '@/src/types/setting'
 
-async function getCompanies(): Promise<Company[]> {
+async function getSetting(): Promise<Setting[]> {
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/company`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/setting`, {
     cache: 'no-store'
   });
 
   if (!res.ok) {
-    throw new Error(`Erro ao listar filiais: ${res.status}`);
+    throw new Error(`Erro ao listar configuraões: ${res.status}`);
   }
+
   return res.json();
 }
 
 export default async function Settings() {
 
-  const companies = await getCompanies();
+  const settings = await getSetting();
 
   return (
     <div>
       <div className='flex items-center justify-between mb-6'>
         <div className='flex items-center justify-left gap-2'>
-          <Building /> Configurações
+          <SlidersHorizontal /> Configurações
         </div>
         <div>
           <Breadcrumb>
@@ -53,10 +54,10 @@ export default async function Settings() {
 
       <Card className='p-4'>
         <CardContent>
-          <Image width={150} height={60} src={require('@/public/images/not-image.jpg')} alt='' />
+          <Image width={150} height={60} src={`${settings[0]?.logo ? 'http://localhost:3000/public/images/' + settings[0]?.logo : '/images/not-image.jpg'}`} alt='' />
         </CardContent>
         <CardFooter className='flex items-center justify-end border-t'>
-        <SettingForm />
+          <SettingForm settingid={settings} />
         </CardFooter>
       </Card>
     </div>

@@ -8,7 +8,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/src/components/ui/sidebar"
-import { Building, Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+import { Building, Building2, Calendar, Home, Inbox, Search, Settings, SlidersHorizontal, User } from "lucide-react"
 
 export function AppSidebar() {
 
@@ -21,22 +21,22 @@ export function AppSidebar() {
         {
             title: "Organizações",
             url: "/admin/organizations",
-            icon: Inbox,
+            icon: Building2,
         },
         {
             title: "Filiais",
             url: "/admin/companies",
-            icon: Calendar,
+            icon: Building,
         },
         {
             title: "Configurações",
             url: "/admin/settings",
-            icon: Search,
+            icon: SlidersHorizontal,
         },
         {
             title: "Usuários",
             url: "/admin/users",
-            icon: Settings,
+            icon: User,
         },
     ]
 
