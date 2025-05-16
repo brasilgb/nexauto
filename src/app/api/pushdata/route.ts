@@ -68,9 +68,9 @@ export async function POST(req: Request) {
             sale = true;
         }
         if (sale) {
-            return { message: 'Dados da venda inseridos com sucesso!' };
+            return NextResponse.json({ message: 'Dados da venda inseridos com sucesso!' }, { status: 404 });
         } else {
-            return { message: 'Dados da venda atualizados com sucesso!' };
+            return NextResponse.json({ message: 'Dados da venda atualizados com sucesso!' }, { status: 404 });
         }
     }
 
@@ -139,9 +139,9 @@ export async function POST(req: Request) {
             }
         }
         if (assoc) {
-            return { message: 'Dados de associação inseridos com sucesso!' };
+            return NextResponse.json({ message: 'Dados da associação inseridos com sucesso!' }, { status: 404 });
         } else {
-            return { message: 'Dados de associação atualizados com sucesso!' };
+            return NextResponse.json({ message: 'Dados da associação atualizados com sucesso!' }, { status: 404 });
         }
     }
 
@@ -217,9 +217,9 @@ export async function POST(req: Request) {
             }
         }
         if (total) {
-            return { message: 'Dados totais inseridos com sucesso!' };
+            return NextResponse.json({ message: 'Dados totais inseridos com sucesso!' }, { status: 404 });
         } else {
-            return { message: 'Dados totais atualizados com sucesso!' };
+            return NextResponse.json({ message: 'Dados totais atualizados com sucesso!' }, { status: 404 });
         }
     }
 
