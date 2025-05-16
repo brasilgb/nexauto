@@ -4,5 +4,4 @@ export interface Organization {
     cnpj: string;
     status: boolean;
     createdAt: string;
-    updatedAt: string;
 }

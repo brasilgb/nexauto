@@ -8,9 +8,23 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/src/components/ui/sidebar"
+import { Setting } from "@/src/types/setting";
 import { Building, Building2, Calendar, Home, Inbox, Search, Settings, SlidersHorizontal, User } from "lucide-react"
 
-export function AppSidebar() {
+async function getSetting(): Promise<Setting[]> {
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/setting`, {
+        cache: 'no-store'
+    });
+
+    if (!res.ok) {
+        throw new Error(`Erro ao listar configuraões: ${res.status}`);
+    }
+
+    return res.json();
+}
+
+export async function AppSidebar() {
 
     const items = [
         {
@@ -39,6 +53,11 @@ export function AppSidebar() {
             icon: User,
         },
     ]
+
+
+
+    const settings = await getSetting() as any;
+
 
     return (
         <Sidebar side='left' variant='sidebar' collapsible='icon' >

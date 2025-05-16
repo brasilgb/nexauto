@@ -22,45 +22,56 @@ import { toast } from "sonner"
 
 const formSchema = z.object({
   name: z.string(),
-  logo: z.instanceof(File, { message: 'Selecione uma imagem.' })
+  logo: z.any().optional(),
+  // logo: z.any().refine((files) => files?.[0], 'A imagem é obrigatória.'),
 })
+type FormData = z.infer<typeof formSchema>;
+export const dynamic = 'force-dynamic';
+interface UserProfileFormProps {
+  initialData?: { name: string; logo?: string | null }; // Dados iniciais para edição (se aplicável)
+  settingid?: any;
+}
 
-export function SettingForm({ settingid }: any) {
- 
+export function SettingForm({ initialData, settingid }: UserProfileFormProps) {
+
   const { loading, setLoading } = useAppContext();
 
+  const [previewImage, setPreviewImage] = useState<string | null>(initialData?.logo || null);
   const [open, setOpen] = useState(false);
 
   const router = useRouter();
-  const form = useForm<z.infer<typeof formSchema>>({
+
+  const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      logo: undefined
-    },
+    defaultValues: initialData || { name: settingid.name, logo: null },
   })
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setLoading(true);
+
     const formData = new FormData();
-    formData.append("name", data.name);
-    formData.append("logo", data.logo);
+    formData.append('name', data.name);
+    console.log('logo data', data);
+    if (data.logo?.[0]) {
+      formData.append('logo', data.logo[0]);
+    }
+
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/setting/${settingid.id}`, {
       method: 'PUT',
       headers: {
-        'Content-type': 'Application/json',
         // Authorization: `Bearer ${session?.user?.token}`
       },
       body: formData,
     });
     const user = await response.json();
     if (user && response.ok) {
+      setPreviewImage(null);
       setLoading(false);
       setOpen(false);
-
+      form.reset({ logo: null });
       toast(
-        "Organização alterada", {
-        description: "Organização alterada com sucesso!",
+        "Configuração alterada", {
+        description: "Configuração alterada com sucesso!",
         classNames: {
           toast: '!bg-green-700 !border-2 !border-white',
           title: '!text-white text-base',
@@ -72,6 +83,18 @@ export function SettingForm({ settingid }: any) {
         position: 'top-right'
       });
       router.replace('/admin/settings')
+    };
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+      form.setValue('logo', e.target.files); // Define o arquivo no React Hook Form
     }
   };
 
@@ -115,15 +138,20 @@ export function SettingForm({ settingid }: any) {
                   >
                     <FormLabel>Nome</FormLabel>
                     <FormControl>
-                      <Input type="file" accept="image" {...fieldProps} onChange={(e) => onChange(e.target.files && e.target.files[0])} />
+                      <Input type="file" accept="image/*" {...fieldProps} onChange={handleImageChange} />
                     </FormControl>
                     <FormMessage />
+                    {previewImage && (
+                      <div className="mt-2">
+                        <img src={previewImage} alt="Prévia da Imagem" className="rounded-full w-20 h-20 object-cover" />
+                      </div>
+                    )}
                   </FormItem>
                 )} />
 
               <DialogFooter className="border-t pt-4">
                 <Button type="submit" variant="default" className="cursor-pointer">
-                  <Save />{loading ? <Loader className="animate-spin" /> : 'Salvar'}
+                  {loading ? <Loader className="animate-spin" /> : <Save />}Salvar
                 </Button>
               </DialogFooter>
             </form>

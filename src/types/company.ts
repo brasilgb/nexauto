@@ -15,6 +15,6 @@ export interface Company {
     status: string;
     whatsapp: string;
     observation: string;
+    organizationId: string;
     createdAt: string;
-    updatedAt: string;
 }

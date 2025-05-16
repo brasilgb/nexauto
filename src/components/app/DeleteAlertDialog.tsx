@@ -37,8 +37,8 @@ export function DeleteAlertDialog({ deleteId, module, route, name }: any) {
             setLoading(false);
             setOpen(false)
             toast(
-                `${name.charAt(0).toUpperCase() + name.slice(1)} deletada`, {
-                description: `${name.charAt(0).toUpperCase() + name.slice(1)} deletada com sucesso!`,
+                `${name.charAt(0).toUpperCase() + name.slice(1)} deletada/o`, {
+                description: `${name.charAt(0).toUpperCase() + name.slice(1)} deletada/o com sucesso!`,
                 classNames: {
                     toast: '!bg-green-700 !border-2 !border-white',
                     title: '!text-white text-base',

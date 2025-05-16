@@ -7,13 +7,12 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/src/components/ui/breadcrumb"
-import { Building, Building2 } from 'lucide-react'
-import { Card } from '@/src/components/ui/card'
-import { Organization } from '@/src/types/organization'
-import EditForm from '../../forms/edit-form'
-import { Company } from '@/src/types/company'
+import AddForm from '../forms/add-form'
+import { User } from '@/src/types/user';
+import { User as Uicon } from 'lucide-react';
+import { Card } from '@/src/components/ui/card';
 
-async function getOrganizations(): Promise<Organization[]> {
+async function getOrganizations(): Promise<User[]> {
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/organization`, {
     cache: 'no-store'
@@ -25,34 +24,13 @@ async function getOrganizations(): Promise<Organization[]> {
   return res.json();
 };
 
-
-async function getCompany(id: string): Promise<Company[]> {
-
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/company/${id}`, {
-    cache: 'no-store'
-  });
-
-  if (!res.ok) {
-    throw new Error(`Erro ao listar filiais: ${res.status}`);
-  }
-  return res.json();
-}
-
-
-export default async function EditCompany({
-  params,
-}: {
-  params: Promise<{ id: string }>
-}) {
-  const { id } = await params;
+export default async function AddUser() {
   const organizations = await getOrganizations();
-  const company = await getCompany(id);
-  
   return (
     <div>
       <div className='flex items-center justify-between mb-6'>
         <div className='flex items-center justify-left gap-2'>
-          <Building /> Filiais
+          <Uicon /> Usuários
         </div>
         <div>
           <Breadcrumb>
@@ -62,18 +40,18 @@ export default async function EditCompany({
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink href="/admin/companies">Filiais</BreadcrumbLink>
+                <BreadcrumbLink href="/admin/users">Usuários</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbPage>Adicionar filial</BreadcrumbPage>
+                <BreadcrumbPage>Adicionar usuário</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         </div>
       </div>
       <Card className='p-4'>
-        <EditForm organizations={organizations} company={company} />
+        <AddForm organizations={organizations} />
       </Card>
     </div>
   )
