@@ -184,6 +184,8 @@ exports.Prisma.SaleScalarFieldEnum = {
   resumo_margem: 'resumo_margem',
   resumo_presen: 'resumo_presen',
   resumo_metdia: 'resumo_metdia',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   organizationId: 'organizationId'
 };
 
@@ -199,6 +201,8 @@ exports.Prisma.AssociationScalarFieldEnum = {
   assoc_margem: 'assoc_margem',
   assoc_repres: 'assoc_repres',
   assoc_metdia: 'assoc_metdia',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   organizationId: 'organizationId'
 };
 
@@ -218,6 +222,8 @@ exports.Prisma.TotalScalarFieldEnum = {
   total_perina: 'total_perina',
   total_valest: 'total_valest',
   total_meta: 'total_meta',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   organizationId: 'organizationId'
 };
 

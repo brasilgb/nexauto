@@ -2,7 +2,8 @@ import prisma from '@/src/lib/prisma';
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-    const data = await req.json();
+    const { data } = await req.json();
+    console.log(data.jdata);
 
     if (data.type === 'venda') {
         let sale = false;
@@ -64,13 +65,13 @@ export async function POST(req: Request) {
                         organizationId: org.id
                     }
                 });
+                sale = true;
             }
-            sale = true;
         }
         if (sale) {
-            return NextResponse.json({ message: 'Dados da venda inseridos com sucesso!' }, { status: 404 });
+            return NextResponse.json({ message: 'Dados da venda inseridos com sucesso!' }, { status: 200 });
         } else {
-            return NextResponse.json({ message: 'Dados da venda atualizados com sucesso!' }, { status: 404 });
+            return NextResponse.json({ message: 'Dados da venda atualizados com sucesso!' }, { status: 201 });
         }
     }
 
@@ -139,9 +140,9 @@ export async function POST(req: Request) {
             }
         }
         if (assoc) {
-            return NextResponse.json({ message: 'Dados da associação inseridos com sucesso!' }, { status: 404 });
+            return NextResponse.json({ message: 'Dados da associação inseridos com sucesso!' }, { status: 200 });
         } else {
-            return NextResponse.json({ message: 'Dados da associação atualizados com sucesso!' }, { status: 404 });
+            return NextResponse.json({ message: 'Dados da associação atualizados com sucesso!' }, { status: 201 });
         }
     }
 
@@ -217,10 +218,9 @@ export async function POST(req: Request) {
             }
         }
         if (total) {
-            return NextResponse.json({ message: 'Dados totais inseridos com sucesso!' }, { status: 404 });
+            return NextResponse.json({ message: 'Dados totais inseridos com sucesso!' }, { status: 200 });
         } else {
-            return NextResponse.json({ message: 'Dados totais atualizados com sucesso!' }, { status: 404 });
+            return NextResponse.json({ message: 'Dados totais atualizados com sucesso!' }, { status: 201 });
         }
     }
-
 }

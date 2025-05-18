@@ -5699,6 +5699,8 @@ export namespace Prisma {
     resumo_margem: string | null
     resumo_presen: string | null
     resumo_metdia: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
     organizationId: string | null
   }
 
@@ -5714,6 +5716,8 @@ export namespace Prisma {
     resumo_margem: string | null
     resumo_presen: string | null
     resumo_metdia: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
     organizationId: string | null
   }
 
@@ -5729,6 +5733,8 @@ export namespace Prisma {
     resumo_margem: number
     resumo_presen: number
     resumo_metdia: number
+    createdAt: number
+    updatedAt: number
     organizationId: number
     _all: number
   }
@@ -5746,6 +5752,8 @@ export namespace Prisma {
     resumo_margem?: true
     resumo_presen?: true
     resumo_metdia?: true
+    createdAt?: true
+    updatedAt?: true
     organizationId?: true
   }
 
@@ -5761,6 +5769,8 @@ export namespace Prisma {
     resumo_margem?: true
     resumo_presen?: true
     resumo_metdia?: true
+    createdAt?: true
+    updatedAt?: true
     organizationId?: true
   }
 
@@ -5776,6 +5786,8 @@ export namespace Prisma {
     resumo_margem?: true
     resumo_presen?: true
     resumo_metdia?: true
+    createdAt?: true
+    updatedAt?: true
     organizationId?: true
     _all?: true
   }
@@ -5864,6 +5876,8 @@ export namespace Prisma {
     resumo_margem: string
     resumo_presen: string
     resumo_metdia: string
+    createdAt: Date
+    updatedAt: Date
     organizationId: string | null
     _count: SaleCountAggregateOutputType | null
     _min: SaleMinAggregateOutputType | null
@@ -5896,6 +5910,8 @@ export namespace Prisma {
     resumo_margem?: boolean
     resumo_presen?: boolean
     resumo_metdia?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     organizationId?: boolean
     Organization?: boolean | Sale$OrganizationArgs<ExtArgs>
   }, ExtArgs["result"]["sale"]>
@@ -5914,10 +5930,12 @@ export namespace Prisma {
     resumo_margem?: boolean
     resumo_presen?: boolean
     resumo_metdia?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     organizationId?: boolean
   }
 
-  export type SaleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "resumo_cnpj" | "resumo_codfil" | "resumo_desfil" | "resumo_datmvt" | "resumo_yearmonth" | "resumo_valdev" | "resumo_valven" | "resumo_margem" | "resumo_presen" | "resumo_metdia" | "organizationId", ExtArgs["result"]["sale"]>
+  export type SaleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "resumo_cnpj" | "resumo_codfil" | "resumo_desfil" | "resumo_datmvt" | "resumo_yearmonth" | "resumo_valdev" | "resumo_valven" | "resumo_margem" | "resumo_presen" | "resumo_metdia" | "createdAt" | "updatedAt" | "organizationId", ExtArgs["result"]["sale"]>
   export type SaleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Organization?: boolean | Sale$OrganizationArgs<ExtArgs>
   }
@@ -5939,6 +5957,8 @@ export namespace Prisma {
       resumo_margem: string
       resumo_presen: string
       resumo_metdia: string
+      createdAt: Date
+      updatedAt: Date
       organizationId: string | null
     }, ExtArgs["result"]["sale"]>
     composites: {}
@@ -6321,6 +6341,8 @@ export namespace Prisma {
     readonly resumo_margem: FieldRef<"Sale", 'String'>
     readonly resumo_presen: FieldRef<"Sale", 'String'>
     readonly resumo_metdia: FieldRef<"Sale", 'String'>
+    readonly createdAt: FieldRef<"Sale", 'DateTime'>
+    readonly updatedAt: FieldRef<"Sale", 'DateTime'>
     readonly organizationId: FieldRef<"Sale", 'String'>
   }
     
@@ -6724,6 +6746,8 @@ export namespace Prisma {
     assoc_margem: string | null
     assoc_repres: string | null
     assoc_metdia: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
     organizationId: string | null
   }
 
@@ -6739,6 +6763,8 @@ export namespace Prisma {
     assoc_margem: string | null
     assoc_repres: string | null
     assoc_metdia: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
     organizationId: string | null
   }
 
@@ -6754,6 +6780,8 @@ export namespace Prisma {
     assoc_margem: number
     assoc_repres: number
     assoc_metdia: number
+    createdAt: number
+    updatedAt: number
     organizationId: number
     _all: number
   }
@@ -6771,6 +6799,8 @@ export namespace Prisma {
     assoc_margem?: true
     assoc_repres?: true
     assoc_metdia?: true
+    createdAt?: true
+    updatedAt?: true
     organizationId?: true
   }
 
@@ -6786,6 +6816,8 @@ export namespace Prisma {
     assoc_margem?: true
     assoc_repres?: true
     assoc_metdia?: true
+    createdAt?: true
+    updatedAt?: true
     organizationId?: true
   }
 
@@ -6801,6 +6833,8 @@ export namespace Prisma {
     assoc_margem?: true
     assoc_repres?: true
     assoc_metdia?: true
+    createdAt?: true
+    updatedAt?: true
     organizationId?: true
     _all?: true
   }
@@ -6889,6 +6923,8 @@ export namespace Prisma {
     assoc_margem: string
     assoc_repres: string
     assoc_metdia: string
+    createdAt: Date
+    updatedAt: Date
     organizationId: string | null
     _count: AssociationCountAggregateOutputType | null
     _min: AssociationMinAggregateOutputType | null
@@ -6921,6 +6957,8 @@ export namespace Prisma {
     assoc_margem?: boolean
     assoc_repres?: boolean
     assoc_metdia?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     organizationId?: boolean
     Organization?: boolean | Association$OrganizationArgs<ExtArgs>
   }, ExtArgs["result"]["association"]>
@@ -6939,10 +6977,12 @@ export namespace Prisma {
     assoc_margem?: boolean
     assoc_repres?: boolean
     assoc_metdia?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     organizationId?: boolean
   }
 
-  export type AssociationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "assoc_cnpj" | "assoc_filial" | "assoc_datmvt" | "assoc_ass" | "assoc_desass" | "assoc_valdev" | "assoc_valven" | "assoc_margem" | "assoc_repres" | "assoc_metdia" | "organizationId", ExtArgs["result"]["association"]>
+  export type AssociationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "assoc_cnpj" | "assoc_filial" | "assoc_datmvt" | "assoc_ass" | "assoc_desass" | "assoc_valdev" | "assoc_valven" | "assoc_margem" | "assoc_repres" | "assoc_metdia" | "createdAt" | "updatedAt" | "organizationId", ExtArgs["result"]["association"]>
   export type AssociationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Organization?: boolean | Association$OrganizationArgs<ExtArgs>
   }
@@ -6964,6 +7004,8 @@ export namespace Prisma {
       assoc_margem: string
       assoc_repres: string
       assoc_metdia: string
+      createdAt: Date
+      updatedAt: Date
       organizationId: string | null
     }, ExtArgs["result"]["association"]>
     composites: {}
@@ -7346,6 +7388,8 @@ export namespace Prisma {
     readonly assoc_margem: FieldRef<"Association", 'String'>
     readonly assoc_repres: FieldRef<"Association", 'String'>
     readonly assoc_metdia: FieldRef<"Association", 'String'>
+    readonly createdAt: FieldRef<"Association", 'DateTime'>
+    readonly updatedAt: FieldRef<"Association", 'DateTime'>
     readonly organizationId: FieldRef<"Association", 'String'>
   }
     
@@ -7753,6 +7797,8 @@ export namespace Prisma {
     total_perina: string | null
     total_valest: string | null
     total_meta: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
     organizationId: string | null
   }
 
@@ -7772,6 +7818,8 @@ export namespace Prisma {
     total_perina: string | null
     total_valest: string | null
     total_meta: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
     organizationId: string | null
   }
 
@@ -7791,6 +7839,8 @@ export namespace Prisma {
     total_perina: number
     total_valest: number
     total_meta: number
+    createdAt: number
+    updatedAt: number
     organizationId: number
     _all: number
   }
@@ -7812,6 +7862,8 @@ export namespace Prisma {
     total_perina?: true
     total_valest?: true
     total_meta?: true
+    createdAt?: true
+    updatedAt?: true
     organizationId?: true
   }
 
@@ -7831,6 +7883,8 @@ export namespace Prisma {
     total_perina?: true
     total_valest?: true
     total_meta?: true
+    createdAt?: true
+    updatedAt?: true
     organizationId?: true
   }
 
@@ -7850,6 +7904,8 @@ export namespace Prisma {
     total_perina?: true
     total_valest?: true
     total_meta?: true
+    createdAt?: true
+    updatedAt?: true
     organizationId?: true
     _all?: true
   }
@@ -7942,6 +7998,8 @@ export namespace Prisma {
     total_perina: string
     total_valest: string
     total_meta: string
+    createdAt: Date
+    updatedAt: Date
     organizationId: string | null
     _count: TotalCountAggregateOutputType | null
     _min: TotalMinAggregateOutputType | null
@@ -7978,6 +8036,8 @@ export namespace Prisma {
     total_perina?: boolean
     total_valest?: boolean
     total_meta?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     organizationId?: boolean
     Organization?: boolean | Total$OrganizationArgs<ExtArgs>
   }, ExtArgs["result"]["total"]>
@@ -8000,10 +8060,12 @@ export namespace Prisma {
     total_perina?: boolean
     total_valest?: boolean
     total_meta?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     organizationId?: boolean
   }
 
-  export type TotalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "total_cnpj" | "total_datatu" | "total_filial" | "total_valdev" | "total_valven" | "total_margem" | "total_permet" | "total_projec" | "total_valjur" | "total_perjur" | "total_valina" | "total_perina" | "total_valest" | "total_meta" | "organizationId", ExtArgs["result"]["total"]>
+  export type TotalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "total_cnpj" | "total_datatu" | "total_filial" | "total_valdev" | "total_valven" | "total_margem" | "total_permet" | "total_projec" | "total_valjur" | "total_perjur" | "total_valina" | "total_perina" | "total_valest" | "total_meta" | "createdAt" | "updatedAt" | "organizationId", ExtArgs["result"]["total"]>
   export type TotalInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Organization?: boolean | Total$OrganizationArgs<ExtArgs>
   }
@@ -8029,6 +8091,8 @@ export namespace Prisma {
       total_perina: string
       total_valest: string
       total_meta: string
+      createdAt: Date
+      updatedAt: Date
       organizationId: string | null
     }, ExtArgs["result"]["total"]>
     composites: {}
@@ -8415,6 +8479,8 @@ export namespace Prisma {
     readonly total_perina: FieldRef<"Total", 'String'>
     readonly total_valest: FieldRef<"Total", 'String'>
     readonly total_meta: FieldRef<"Total", 'String'>
+    readonly createdAt: FieldRef<"Total", 'DateTime'>
+    readonly updatedAt: FieldRef<"Total", 'DateTime'>
     readonly organizationId: FieldRef<"Total", 'String'>
   }
     
@@ -8886,6 +8952,8 @@ export namespace Prisma {
     resumo_margem: 'resumo_margem',
     resumo_presen: 'resumo_presen',
     resumo_metdia: 'resumo_metdia',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
     organizationId: 'organizationId'
   };
 
@@ -8904,6 +8972,8 @@ export namespace Prisma {
     assoc_margem: 'assoc_margem',
     assoc_repres: 'assoc_repres',
     assoc_metdia: 'assoc_metdia',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
     organizationId: 'organizationId'
   };
 
@@ -8926,6 +8996,8 @@ export namespace Prisma {
     total_perina: 'total_perina',
     total_valest: 'total_valest',
     total_meta: 'total_meta',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
     organizationId: 'organizationId'
   };
 
@@ -9456,6 +9528,8 @@ export namespace Prisma {
     resumo_margem?: StringFilter<"Sale"> | string
     resumo_presen?: StringFilter<"Sale"> | string
     resumo_metdia?: StringFilter<"Sale"> | string
+    createdAt?: DateTimeFilter<"Sale"> | Date | string
+    updatedAt?: DateTimeFilter<"Sale"> | Date | string
     organizationId?: StringNullableFilter<"Sale"> | string | null
     Organization?: XOR<OrganizationNullableScalarRelationFilter, OrganizationWhereInput> | null
   }
@@ -9472,6 +9546,8 @@ export namespace Prisma {
     resumo_margem?: SortOrder
     resumo_presen?: SortOrder
     resumo_metdia?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     organizationId?: SortOrderInput | SortOrder
     Organization?: OrganizationOrderByWithRelationInput
     _relevance?: SaleOrderByRelevanceInput
@@ -9492,6 +9568,8 @@ export namespace Prisma {
     resumo_margem?: StringFilter<"Sale"> | string
     resumo_presen?: StringFilter<"Sale"> | string
     resumo_metdia?: StringFilter<"Sale"> | string
+    createdAt?: DateTimeFilter<"Sale"> | Date | string
+    updatedAt?: DateTimeFilter<"Sale"> | Date | string
     organizationId?: StringNullableFilter<"Sale"> | string | null
     Organization?: XOR<OrganizationNullableScalarRelationFilter, OrganizationWhereInput> | null
   }, "id">
@@ -9508,6 +9586,8 @@ export namespace Prisma {
     resumo_margem?: SortOrder
     resumo_presen?: SortOrder
     resumo_metdia?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     organizationId?: SortOrderInput | SortOrder
     _count?: SaleCountOrderByAggregateInput
     _max?: SaleMaxOrderByAggregateInput
@@ -9529,6 +9609,8 @@ export namespace Prisma {
     resumo_margem?: StringWithAggregatesFilter<"Sale"> | string
     resumo_presen?: StringWithAggregatesFilter<"Sale"> | string
     resumo_metdia?: StringWithAggregatesFilter<"Sale"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Sale"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Sale"> | Date | string
     organizationId?: StringNullableWithAggregatesFilter<"Sale"> | string | null
   }
 
@@ -9547,6 +9629,8 @@ export namespace Prisma {
     assoc_margem?: StringFilter<"Association"> | string
     assoc_repres?: StringFilter<"Association"> | string
     assoc_metdia?: StringFilter<"Association"> | string
+    createdAt?: DateTimeFilter<"Association"> | Date | string
+    updatedAt?: DateTimeFilter<"Association"> | Date | string
     organizationId?: StringNullableFilter<"Association"> | string | null
     Organization?: XOR<OrganizationNullableScalarRelationFilter, OrganizationWhereInput> | null
   }
@@ -9563,6 +9647,8 @@ export namespace Prisma {
     assoc_margem?: SortOrder
     assoc_repres?: SortOrder
     assoc_metdia?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     organizationId?: SortOrderInput | SortOrder
     Organization?: OrganizationOrderByWithRelationInput
     _relevance?: AssociationOrderByRelevanceInput
@@ -9583,6 +9669,8 @@ export namespace Prisma {
     assoc_margem?: StringFilter<"Association"> | string
     assoc_repres?: StringFilter<"Association"> | string
     assoc_metdia?: StringFilter<"Association"> | string
+    createdAt?: DateTimeFilter<"Association"> | Date | string
+    updatedAt?: DateTimeFilter<"Association"> | Date | string
     organizationId?: StringNullableFilter<"Association"> | string | null
     Organization?: XOR<OrganizationNullableScalarRelationFilter, OrganizationWhereInput> | null
   }, "id">
@@ -9599,6 +9687,8 @@ export namespace Prisma {
     assoc_margem?: SortOrder
     assoc_repres?: SortOrder
     assoc_metdia?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     organizationId?: SortOrderInput | SortOrder
     _count?: AssociationCountOrderByAggregateInput
     _max?: AssociationMaxOrderByAggregateInput
@@ -9620,6 +9710,8 @@ export namespace Prisma {
     assoc_margem?: StringWithAggregatesFilter<"Association"> | string
     assoc_repres?: StringWithAggregatesFilter<"Association"> | string
     assoc_metdia?: StringWithAggregatesFilter<"Association"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Association"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Association"> | Date | string
     organizationId?: StringNullableWithAggregatesFilter<"Association"> | string | null
   }
 
@@ -9642,6 +9734,8 @@ export namespace Prisma {
     total_perina?: StringFilter<"Total"> | string
     total_valest?: StringFilter<"Total"> | string
     total_meta?: StringFilter<"Total"> | string
+    createdAt?: DateTimeFilter<"Total"> | Date | string
+    updatedAt?: DateTimeFilter<"Total"> | Date | string
     organizationId?: StringNullableFilter<"Total"> | string | null
     Organization?: XOR<OrganizationNullableScalarRelationFilter, OrganizationWhereInput> | null
   }
@@ -9662,6 +9756,8 @@ export namespace Prisma {
     total_perina?: SortOrder
     total_valest?: SortOrder
     total_meta?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     organizationId?: SortOrderInput | SortOrder
     Organization?: OrganizationOrderByWithRelationInput
     _relevance?: TotalOrderByRelevanceInput
@@ -9686,6 +9782,8 @@ export namespace Prisma {
     total_perina?: StringFilter<"Total"> | string
     total_valest?: StringFilter<"Total"> | string
     total_meta?: StringFilter<"Total"> | string
+    createdAt?: DateTimeFilter<"Total"> | Date | string
+    updatedAt?: DateTimeFilter<"Total"> | Date | string
     organizationId?: StringNullableFilter<"Total"> | string | null
     Organization?: XOR<OrganizationNullableScalarRelationFilter, OrganizationWhereInput> | null
   }, "id">
@@ -9706,6 +9804,8 @@ export namespace Prisma {
     total_perina?: SortOrder
     total_valest?: SortOrder
     total_meta?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     organizationId?: SortOrderInput | SortOrder
     _count?: TotalCountOrderByAggregateInput
     _max?: TotalMaxOrderByAggregateInput
@@ -9731,6 +9831,8 @@ export namespace Prisma {
     total_perina?: StringWithAggregatesFilter<"Total"> | string
     total_valest?: StringWithAggregatesFilter<"Total"> | string
     total_meta?: StringWithAggregatesFilter<"Total"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Total"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Total"> | Date | string
     organizationId?: StringNullableWithAggregatesFilter<"Total"> | string | null
   }
 
@@ -10134,6 +10236,8 @@ export namespace Prisma {
     resumo_margem: string
     resumo_presen: string
     resumo_metdia: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     Organization?: OrganizationCreateNestedOneWithoutSaleInput
   }
 
@@ -10149,6 +10253,8 @@ export namespace Prisma {
     resumo_margem: string
     resumo_presen: string
     resumo_metdia: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     organizationId?: string | null
   }
 
@@ -10164,6 +10270,8 @@ export namespace Prisma {
     resumo_margem?: StringFieldUpdateOperationsInput | string
     resumo_presen?: StringFieldUpdateOperationsInput | string
     resumo_metdia?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Organization?: OrganizationUpdateOneWithoutSaleNestedInput
   }
 
@@ -10179,6 +10287,8 @@ export namespace Prisma {
     resumo_margem?: StringFieldUpdateOperationsInput | string
     resumo_presen?: StringFieldUpdateOperationsInput | string
     resumo_metdia?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     organizationId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -10194,6 +10304,8 @@ export namespace Prisma {
     resumo_margem: string
     resumo_presen: string
     resumo_metdia: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     organizationId?: string | null
   }
 
@@ -10209,6 +10321,8 @@ export namespace Prisma {
     resumo_margem?: StringFieldUpdateOperationsInput | string
     resumo_presen?: StringFieldUpdateOperationsInput | string
     resumo_metdia?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SaleUncheckedUpdateManyInput = {
@@ -10223,6 +10337,8 @@ export namespace Prisma {
     resumo_margem?: StringFieldUpdateOperationsInput | string
     resumo_presen?: StringFieldUpdateOperationsInput | string
     resumo_metdia?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     organizationId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -10238,6 +10354,8 @@ export namespace Prisma {
     assoc_margem: string
     assoc_repres: string
     assoc_metdia: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     Organization?: OrganizationCreateNestedOneWithoutAssociationInput
   }
 
@@ -10253,6 +10371,8 @@ export namespace Prisma {
     assoc_margem: string
     assoc_repres: string
     assoc_metdia: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     organizationId?: string | null
   }
 
@@ -10268,6 +10388,8 @@ export namespace Prisma {
     assoc_margem?: StringFieldUpdateOperationsInput | string
     assoc_repres?: StringFieldUpdateOperationsInput | string
     assoc_metdia?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Organization?: OrganizationUpdateOneWithoutAssociationNestedInput
   }
 
@@ -10283,6 +10405,8 @@ export namespace Prisma {
     assoc_margem?: StringFieldUpdateOperationsInput | string
     assoc_repres?: StringFieldUpdateOperationsInput | string
     assoc_metdia?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     organizationId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -10298,6 +10422,8 @@ export namespace Prisma {
     assoc_margem: string
     assoc_repres: string
     assoc_metdia: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     organizationId?: string | null
   }
 
@@ -10313,6 +10439,8 @@ export namespace Prisma {
     assoc_margem?: StringFieldUpdateOperationsInput | string
     assoc_repres?: StringFieldUpdateOperationsInput | string
     assoc_metdia?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AssociationUncheckedUpdateManyInput = {
@@ -10327,6 +10455,8 @@ export namespace Prisma {
     assoc_margem?: StringFieldUpdateOperationsInput | string
     assoc_repres?: StringFieldUpdateOperationsInput | string
     assoc_metdia?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     organizationId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -10346,6 +10476,8 @@ export namespace Prisma {
     total_perina: string
     total_valest: string
     total_meta: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     Organization?: OrganizationCreateNestedOneWithoutTotalInput
   }
 
@@ -10365,6 +10497,8 @@ export namespace Prisma {
     total_perina: string
     total_valest: string
     total_meta: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     organizationId?: string | null
   }
 
@@ -10384,6 +10518,8 @@ export namespace Prisma {
     total_perina?: StringFieldUpdateOperationsInput | string
     total_valest?: StringFieldUpdateOperationsInput | string
     total_meta?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Organization?: OrganizationUpdateOneWithoutTotalNestedInput
   }
 
@@ -10403,6 +10539,8 @@ export namespace Prisma {
     total_perina?: StringFieldUpdateOperationsInput | string
     total_valest?: StringFieldUpdateOperationsInput | string
     total_meta?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     organizationId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -10422,6 +10560,8 @@ export namespace Prisma {
     total_perina: string
     total_valest: string
     total_meta: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     organizationId?: string | null
   }
 
@@ -10441,6 +10581,8 @@ export namespace Prisma {
     total_perina?: StringFieldUpdateOperationsInput | string
     total_valest?: StringFieldUpdateOperationsInput | string
     total_meta?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TotalUncheckedUpdateManyInput = {
@@ -10459,6 +10601,8 @@ export namespace Prisma {
     total_perina?: StringFieldUpdateOperationsInput | string
     total_valest?: StringFieldUpdateOperationsInput | string
     total_meta?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     organizationId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -10839,6 +10983,8 @@ export namespace Prisma {
     resumo_margem?: SortOrder
     resumo_presen?: SortOrder
     resumo_metdia?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     organizationId?: SortOrder
   }
 
@@ -10854,6 +11000,8 @@ export namespace Prisma {
     resumo_margem?: SortOrder
     resumo_presen?: SortOrder
     resumo_metdia?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     organizationId?: SortOrder
   }
 
@@ -10869,6 +11017,8 @@ export namespace Prisma {
     resumo_margem?: SortOrder
     resumo_presen?: SortOrder
     resumo_metdia?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     organizationId?: SortOrder
   }
 
@@ -10890,6 +11040,8 @@ export namespace Prisma {
     assoc_margem?: SortOrder
     assoc_repres?: SortOrder
     assoc_metdia?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     organizationId?: SortOrder
   }
 
@@ -10905,6 +11057,8 @@ export namespace Prisma {
     assoc_margem?: SortOrder
     assoc_repres?: SortOrder
     assoc_metdia?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     organizationId?: SortOrder
   }
 
@@ -10920,6 +11074,8 @@ export namespace Prisma {
     assoc_margem?: SortOrder
     assoc_repres?: SortOrder
     assoc_metdia?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     organizationId?: SortOrder
   }
 
@@ -10945,6 +11101,8 @@ export namespace Prisma {
     total_perina?: SortOrder
     total_valest?: SortOrder
     total_meta?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     organizationId?: SortOrder
   }
 
@@ -10964,6 +11122,8 @@ export namespace Prisma {
     total_perina?: SortOrder
     total_valest?: SortOrder
     total_meta?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     organizationId?: SortOrder
   }
 
@@ -10983,6 +11143,8 @@ export namespace Prisma {
     total_perina?: SortOrder
     total_valest?: SortOrder
     total_meta?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     organizationId?: SortOrder
   }
 
@@ -11834,6 +11996,8 @@ export namespace Prisma {
     resumo_margem: string
     resumo_presen: string
     resumo_metdia: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type SaleUncheckedCreateWithoutOrganizationInput = {
@@ -11848,6 +12012,8 @@ export namespace Prisma {
     resumo_margem: string
     resumo_presen: string
     resumo_metdia: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type SaleCreateOrConnectWithoutOrganizationInput = {
@@ -11872,6 +12038,8 @@ export namespace Prisma {
     assoc_margem: string
     assoc_repres: string
     assoc_metdia: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type AssociationUncheckedCreateWithoutOrganizationInput = {
@@ -11886,6 +12054,8 @@ export namespace Prisma {
     assoc_margem: string
     assoc_repres: string
     assoc_metdia: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type AssociationCreateOrConnectWithoutOrganizationInput = {
@@ -11914,6 +12084,8 @@ export namespace Prisma {
     total_perina: string
     total_valest: string
     total_meta: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type TotalUncheckedCreateWithoutOrganizationInput = {
@@ -11932,6 +12104,8 @@ export namespace Prisma {
     total_perina: string
     total_valest: string
     total_meta: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type TotalCreateOrConnectWithoutOrganizationInput = {
@@ -12075,6 +12249,8 @@ export namespace Prisma {
     resumo_margem?: StringFilter<"Sale"> | string
     resumo_presen?: StringFilter<"Sale"> | string
     resumo_metdia?: StringFilter<"Sale"> | string
+    createdAt?: DateTimeFilter<"Sale"> | Date | string
+    updatedAt?: DateTimeFilter<"Sale"> | Date | string
     organizationId?: StringNullableFilter<"Sale"> | string | null
   }
 
@@ -12109,6 +12285,8 @@ export namespace Prisma {
     assoc_margem?: StringFilter<"Association"> | string
     assoc_repres?: StringFilter<"Association"> | string
     assoc_metdia?: StringFilter<"Association"> | string
+    createdAt?: DateTimeFilter<"Association"> | Date | string
+    updatedAt?: DateTimeFilter<"Association"> | Date | string
     organizationId?: StringNullableFilter<"Association"> | string | null
   }
 
@@ -12147,6 +12325,8 @@ export namespace Prisma {
     total_perina?: StringFilter<"Total"> | string
     total_valest?: StringFilter<"Total"> | string
     total_meta?: StringFilter<"Total"> | string
+    createdAt?: DateTimeFilter<"Total"> | Date | string
+    updatedAt?: DateTimeFilter<"Total"> | Date | string
     organizationId?: StringNullableFilter<"Total"> | string | null
   }
 
@@ -12614,6 +12794,8 @@ export namespace Prisma {
     resumo_margem: string
     resumo_presen: string
     resumo_metdia: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type AssociationCreateManyOrganizationInput = {
@@ -12628,6 +12810,8 @@ export namespace Prisma {
     assoc_margem: string
     assoc_repres: string
     assoc_metdia: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type TotalCreateManyOrganizationInput = {
@@ -12646,6 +12830,8 @@ export namespace Prisma {
     total_perina: string
     total_valest: string
     total_meta: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CompanyUpdateWithoutOrganizationInput = {
@@ -12782,6 +12968,8 @@ export namespace Prisma {
     resumo_margem?: StringFieldUpdateOperationsInput | string
     resumo_presen?: StringFieldUpdateOperationsInput | string
     resumo_metdia?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SaleUncheckedUpdateWithoutOrganizationInput = {
@@ -12796,6 +12984,8 @@ export namespace Prisma {
     resumo_margem?: StringFieldUpdateOperationsInput | string
     resumo_presen?: StringFieldUpdateOperationsInput | string
     resumo_metdia?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SaleUncheckedUpdateManyWithoutOrganizationInput = {
@@ -12810,6 +13000,8 @@ export namespace Prisma {
     resumo_margem?: StringFieldUpdateOperationsInput | string
     resumo_presen?: StringFieldUpdateOperationsInput | string
     resumo_metdia?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AssociationUpdateWithoutOrganizationInput = {
@@ -12824,6 +13016,8 @@ export namespace Prisma {
     assoc_margem?: StringFieldUpdateOperationsInput | string
     assoc_repres?: StringFieldUpdateOperationsInput | string
     assoc_metdia?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AssociationUncheckedUpdateWithoutOrganizationInput = {
@@ -12838,6 +13032,8 @@ export namespace Prisma {
     assoc_margem?: StringFieldUpdateOperationsInput | string
     assoc_repres?: StringFieldUpdateOperationsInput | string
     assoc_metdia?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AssociationUncheckedUpdateManyWithoutOrganizationInput = {
@@ -12852,6 +13048,8 @@ export namespace Prisma {
     assoc_margem?: StringFieldUpdateOperationsInput | string
     assoc_repres?: StringFieldUpdateOperationsInput | string
     assoc_metdia?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TotalUpdateWithoutOrganizationInput = {
@@ -12870,6 +13068,8 @@ export namespace Prisma {
     total_perina?: StringFieldUpdateOperationsInput | string
     total_valest?: StringFieldUpdateOperationsInput | string
     total_meta?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TotalUncheckedUpdateWithoutOrganizationInput = {
@@ -12888,6 +13088,8 @@ export namespace Prisma {
     total_perina?: StringFieldUpdateOperationsInput | string
     total_valest?: StringFieldUpdateOperationsInput | string
     total_meta?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TotalUncheckedUpdateManyWithoutOrganizationInput = {
@@ -12906,6 +13108,8 @@ export namespace Prisma {
     total_perina?: StringFieldUpdateOperationsInput | string
     total_valest?: StringFieldUpdateOperationsInput | string
     total_meta?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserCreateManyCompanyInput = {

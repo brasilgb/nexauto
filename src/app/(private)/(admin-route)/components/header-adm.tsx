@@ -7,7 +7,7 @@ export default function HeaderAdm() {
     <header className='flex bg-white h-16 shrink-0 items-center justify-between gap-2 shadow w-full'>
         <CustomTrigger />
       <div className='flex items-center gap-2 px-4'>
-        <DropdowMenuAdm userName={'chule'} />
+        <DropdowMenuAdm />
       </div>
     </header>
   )

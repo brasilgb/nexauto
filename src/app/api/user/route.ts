@@ -1,7 +1,7 @@
 import { z } from "zod";
 import prisma from '@/src/lib/prisma';
 import { NextResponse } from "next/server";
-import { hash } from "bcryptjs";
+import { hash } from "bcrypt-ts";
 
 const userSchema = z.object({
     organizationId: z.string().min(1),

@@ -5,13 +5,13 @@ import { Bell, Menu } from "lucide-react"
 
 
 import { Button } from "@/src/components/ui/button"
-import { UserDropdown } from "./user-dropdown"
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@/src/components/ui/navigation-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar"
 
 import { usePathname } from "next/navigation"
+import { UserDropdow } from "./user-dropdown"
 
-export default function HeaderCustomer() {
+export default function HeaderCustomer({username}: any) {
   const pathname = usePathname();
   return (
     <header className="sticky top-0 z-50 flex h-16 w-full items-center justify-between border-b bg-background px-4 md:px-6">
@@ -51,7 +51,7 @@ export default function HeaderCustomer() {
           <span className="sr-only">Notificações</span>
         </Button>
         {/* <ThemeToggle /> */}
-        <UserDropdown />
+        <UserDropdow username={username} />
       </div>
     </header>
   )

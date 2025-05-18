@@ -1,4 +1,3 @@
-"use client"
 
 import { CreditCard, LogOut, Settings, User } from "lucide-react"
 
@@ -13,8 +12,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/src/components/ui/dropdown-menu"
+import Form from "next/form"
+import logoutAction from "@/src/app/(auth)/(logout)/logoutActions"
 
-export function UserDropdown() {
+export function UserDropdow({username}: any) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -26,11 +27,8 @@ export function UserDropdown() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
-        <DropdownMenuLabel className="font-normal">
-          <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">Usuário</p>
-            <p className="text-xs leading-none text-muted-foreground">usuario@exemplo.com</p>
-          </div>
+        <DropdownMenuLabel className="flex items-center gap-2">
+          <User className="h-4 w-4" />{username}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
@@ -38,19 +36,15 @@ export function UserDropdown() {
             <User className="mr-2 h-4 w-4" />
             <span>Perfil</span>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <CreditCard className="mr-2 h-4 w-4" />
-            <span>Faturamento</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Settings className="mr-2 h-4 w-4" />
-            <span>Configurações</span>
-          </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <LogOut className="mr-2 h-4 w-4" />
-          <span>Sair</span>
+          <Form action={logoutAction}>
+            <button className="flex items-center gap-2">
+              <LogOut className="h-4 w-4" />
+              <span>Sair</span>
+            </button>
+          </Form>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

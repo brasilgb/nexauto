@@ -1,3 +1,5 @@
+import { auth } from "@/auth";
+import logoutAction from "@/src/app/(auth)/(logout)/logoutActions";
 import { Button } from "@/src/components/ui/button"
 import {
     DropdownMenu,
@@ -16,27 +18,31 @@ import {
 import { LogOut, User } from "lucide-react";
 import Form from "next/form"
 
-interface DropdowUserProps {
-    userName: string;
-}
 
-export function DropdowMenuAdm({ userName }: DropdowUserProps) {
+export async function DropdowMenuAdm() {
+    const session = await auth();
+    
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="outline"><User /></Button>
+                <Button variant="outline"><User className="h-4 w-4"/></Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
-                <DropdownMenuLabel className="flex items-center gap-2"><User className="h-4 w-4" />{userName}</DropdownMenuLabel>
+                <DropdownMenuLabel className="flex items-center gap-2">
+                    <User className="h-4 w-4" />
+                {session?.user?.name}
+                </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem className="flex items-center gap-2">
                     <User className="h-4 w-4" />Profile
-                    </DropdownMenuItem>
+                </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                    <Form action={'logoutAction'}>
-                        logout
-                        {/* <button className="flex items-center gap-2"><LogOut className="h-4 w-4" /> Sair</button> */}
+                    <Form action={logoutAction}>
+                        <button className="flex items-center gap-2">
+                            <LogOut className="h-4 w-4" />
+                            <span>Sair</span>
+                        </button>
                     </Form>
                 </DropdownMenuItem>
             </DropdownMenuContent>

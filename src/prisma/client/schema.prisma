@@ -103,6 +103,8 @@ model Sale {
   resumo_presen    String
   resumo_metdia    String
 
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @default(now())
   Organization   Organization? @relation(fields: [organizationId], references: [id])
   organizationId String?
 
@@ -121,6 +123,9 @@ model Association {
   assoc_margem String
   assoc_repres String
   assoc_metdia String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 
   Organization   Organization? @relation(fields: [organizationId], references: [id])
   organizationId String?
@@ -144,6 +149,9 @@ model Total {
   total_perina String
   total_valest String
   total_meta   String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 
   Organization   Organization? @relation(fields: [organizationId], references: [id])
   organizationId String?
