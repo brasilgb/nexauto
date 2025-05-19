@@ -30,4 +30,6 @@ export const AppProvider = ({ children }: AppProviderProps) => {
   );
 };
 
-export const useAppContext = () => useContext(AppContext);
+export function useAppContext() {
+  return useContext(AppContext);
+}

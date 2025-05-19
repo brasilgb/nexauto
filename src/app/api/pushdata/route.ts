@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
     const { data } = await req.json();
-    console.log(data.jdata);
 
     if (data.type === 'venda') {
         let sale = false;

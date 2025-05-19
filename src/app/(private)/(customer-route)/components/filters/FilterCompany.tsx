@@ -1,18 +1,32 @@
 'use client'
-import React, { useEffect, useState } from 'react'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { useAppContext } from '@/contexts/AppContext';
-import Loading from '../loading';
+} from "@/src/components/ui/select"
+import { useAppContext } from '@/src/contexts/AppContext';
+import { Company } from "@/src/types/company";
+import { useEffect, useState } from "react";
 
-export default function FilterCompany({ data }: any) {
-
+export default function FilterCompany() {
   const { setCompanyNumber } = useAppContext();
+  const [companies, setCompanies] = useState<Company[]>([]);
+
+  useEffect(() => {
+    const getCompany = async () => {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/company`, {
+        method: 'GET'
+      })
+        .then((res) => res.json())
+        .then((res) => setCompanies(res))
+        .catch((err) => console.log(err))
+        .finally(() => console.log('FIM')
+        );
+    };
+    getCompany();
+  }, [])
 
   const handleValueCity = (value: string) => {
     setCompanyNumber(value)
@@ -25,7 +39,7 @@ export default function FilterCompany({ data }: any) {
           <SelectValue placeholder="Filial" />
         </SelectTrigger>
         <SelectContent>
-          {data?.map((comp: any, idx: number) => (
+          {companies?.map((comp: any, idx: number) => (
             <SelectItem key={idx} value={comp.subnumber}>{comp.subname}</SelectItem>
           ))}
         </SelectContent>

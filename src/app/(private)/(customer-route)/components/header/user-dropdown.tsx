@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/src/components/ui/dropdown-menu"
 import Form from "next/form"
-import logoutAction from "@/src/app/(auth)/(logout)/logoutActions"
+import logoutAction from "@/src/app/(public)/(auth)/(logout)/logoutActions"
 
 export function UserDropdow({username}: any) {
   return (

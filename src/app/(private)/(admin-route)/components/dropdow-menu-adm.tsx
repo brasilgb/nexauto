@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import logoutAction from "@/src/app/(auth)/(logout)/logoutActions";
+import logoutAction from "@/src/app/(public)/(auth)/(logout)/logoutActions";
 import { Button } from "@/src/components/ui/button"
 import {
     DropdownMenu,

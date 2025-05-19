@@ -15,7 +15,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     credentials.password as string
                 )
 
-
                 return user;
             }
         }),
@@ -55,7 +54,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         },
     },
     pages: {
-        // signIn: "/login", // Opcional: página de login customizada
+        signIn: "/sign-in", // Opcional: página de login customizada
         // ... outras páginas
     }
 })

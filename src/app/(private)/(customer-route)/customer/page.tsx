@@ -5,8 +5,13 @@ import { Sales } from '@/src/types/sales';
 import { auth } from '@/auth';
 import { Totals } from '@/src/types/totals';
 
-async function getTotals(): Promise<Totals[]> {
+interface GetData {
+  org: string,
+  com: string;
+  dat: string;
+}
 
+async function getTotals({ org, com, dat }: GetData): Promise<Totals[]> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/totals`, {
     cache: 'no-store',
     method: 'POST',
@@ -15,19 +20,19 @@ async function getTotals(): Promise<Totals[]> {
       // Authorization: `Bearer ${session?.user?.token}`
     },
     body: JSON.stringify({
-      organization: '4bbc410e-5217-4d46-bd40-b969afa0b207',
-      company: '0',
-      date: '20240502'
+      organization: org,
+      company: com,
+      date: dat
     })
   });
 
-  if (!res.ok) {
-    throw new Error(`Erro ao listar totais: ${res.status}`);
-  }
+  // if (!res.ok) {
+  //   throw new Error(`Erro ao listar totais: ${res.status}`);
+  // }
   return res.json();
 };
 
-async function getSales(): Promise<Sales[]> {
+async function getSales({ org, com, dat }: GetData): Promise<Sales[]> {
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/sales`, {
     cache: 'no-store',
@@ -37,28 +42,38 @@ async function getSales(): Promise<Sales[]> {
       // Authorization: `Bearer ${session?.user?.token}`
     },
     body: JSON.stringify({
-      organization: '4bbc410e-5217-4d46-bd40-b969afa0b207',
-      company: '0',
-      date: '20240502'
+      organization: org,
+      company: com,
+      date: dat
     })
   });
 
-  if (!res.ok) {
-    throw new Error(`Erro ao listar vendas: ${res.status}`);
-  }
+  // if (!res.ok) {
+  //   throw new Error(`Erro ao listar vendas: ${res.status}`);
+  // }
   return res.json();
 };
 
 export default async function Customer() {
-  const sales = await getSales();
-  const totals = await getTotals();
+  const session = await auth() as any;
+
+  // Replace these values with actual data as needed
+  const params = { org: session?.user?.organizationId, com: '0', dat: '20240502' };
+
+  const sales = await getSales(params);
+  const totals = await getTotals(params);
+
+
   // const session = await auth();
   // console.log(session);
-  
+
   return (
     <div className='flex flex-col gap-4'>
-      <KpisDashboard data={totals} />
-      <RadialChartCustomer data={totals} />
+      {totals ?
+        <>
+          <KpisDashboard data={totals} />
+          <RadialChartCustomer data={totals} />
+        </> : <span className='text-sm text-gray-600'>Ops, não há dados para gerar análises...</span>}
     </div>
   )
 }
