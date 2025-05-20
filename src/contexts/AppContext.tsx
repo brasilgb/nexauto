@@ -13,7 +13,7 @@ const SESSION_STORAGE_KEY = 'storage_atm';
 export const AppProvider = ({ children }: AppProviderProps) => {
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [companyNumber, setCompanyNumber] = useState<number>(1);
+  const [companyNumber, setCompanyNumber] = useState<string>('1');
   const [selectedDate, setSelectedDate] = useState<Date>();
 
   return (

@@ -7,15 +7,33 @@ export async function POST(req: Request) {
 
         const { organization, company, date } = body;
 
-        const associacoes = await prisma.association.findMany({
+        const associacoesForDate = await prisma.association.findMany({
             where: {
                 organizationId: organization,
                 assoc_filial: company,
                 assoc_datmvt: date
             },
         });
+        if (associacoesForDate.length > 0) {
+            return NextResponse.json(associacoesForDate, { status: 201 });
+        } else {
+            const lastDate = await prisma.association.findFirst({
+                orderBy: {
+                    assoc_datmvt: 'desc'
+                }
+            });
 
-        return NextResponse.json(associacoes, { status: 201 });
+            const associationsLastDate = await prisma.association.findMany({
+                where: {
+                    organizationId: organization,
+                    assoc_filial: company,
+                    assoc_datmvt: lastDate?.assoc_datmvt
+                }
+            });
+            if (associationsLastDate) {
+                return NextResponse.json(associationsLastDate, { status: 201 });
+            }
+        }
     } catch (error) {
         return NextResponse.json({ error: 'Erro ao listar associação' }, { status: 500 });
     }

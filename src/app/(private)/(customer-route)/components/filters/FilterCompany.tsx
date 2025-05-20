@@ -11,7 +11,7 @@ import { Company } from "@/src/types/company";
 import { useEffect, useState } from "react";
 
 export default function FilterCompany() {
-  const { setCompanyNumber } = useAppContext();
+  const { setCompanyNumber, companyNumber } = useAppContext();
   const [companies, setCompanies] = useState<Company[]>([]);
 
   useEffect(() => {
@@ -22,23 +22,20 @@ export default function FilterCompany() {
         .then((res) => res.json())
         .then((res) => setCompanies(res))
         .catch((err) => console.log(err))
-        .finally(() => console.log('FIM')
+        .finally(() => console.log('')
         );
     };
     getCompany();
-  }, [])
-
-  const handleValueCity = (value: string) => {
-    setCompanyNumber(value)
-  };
+  }, []);
 
   return (
     <>
-      <Select onValueChange={handleValueCity}>
+      <Select onValueChange={(value) => setCompanyNumber(value)} value={companyNumber}>
         <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Filial" />
+          <SelectValue />
         </SelectTrigger>
         <SelectContent>
+          <SelectItem value="0">Dados da rede</SelectItem>
           {companies?.map((comp: any, idx: number) => (
             <SelectItem key={idx} value={comp.subnumber}>{comp.subname}</SelectItem>
           ))}

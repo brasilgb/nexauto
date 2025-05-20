@@ -14,16 +14,14 @@ import {
 } from "@/src/components/ui/dropdown-menu"
 import Form from "next/form"
 import logoutAction from "@/src/app/(public)/(auth)/(logout)/logoutActions"
+import Link from "next/link"
 
 export function UserDropdow({username}: any) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-          <Avatar className="h-8 w-8">
-            <AvatarImage src="/placeholder.svg?height=32&width=32" alt="@usuario" />
-            <AvatarFallback>US</AvatarFallback>
-          </Avatar>
+        <Button variant="ghost" className="relative h-8 w-8 rounded-full bg-accent">
+          <User />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
@@ -32,9 +30,11 @@ export function UserDropdow({username}: any) {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
+          <DropdownMenuItem asChild>
+           <Link href={"/customer/users"}>
             <User className="mr-2 h-4 w-4" />
-            <span>Perfil</span>
+            <span>Usuários</span>
+            </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />

@@ -5,6 +5,7 @@ import { hash } from 'bcryptjs';
 
 const userSchema = z.object({
     organizationId: z.string().min(1),
+    companyId: z.string().optional(),
     name: z.string().min(1),
     email: z.string().min(1),
     password: z.string(),

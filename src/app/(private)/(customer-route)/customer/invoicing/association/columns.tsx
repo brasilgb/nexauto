@@ -35,7 +35,7 @@ export const columns: ColumnDef<Payment>[] = [
     },
     {
         accessorKey: "assoc_repres",
-        header: "Representa%",
+        header: "Representa",
     },
     {
         accessorKey: "assoc_metdia",

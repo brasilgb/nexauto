@@ -38,7 +38,7 @@ export async function POST(req: Request) {
                         resumo_desfil: jdata.resumo_desfil,
                         resumo_datmvt: jdata.resumo_datmvt,
                         resumo_yearmonth: (jdata.resumo_datmvt).slice(0, 6),
-                        resumo_valdev: jdata.resumo_valdev,
+                        resumo_valdev: (parseFloat(jdata.resumo_valdev)).toString(),
                         resumo_valven: (parseFloat(jdata.resumo_valven)).toString(),
                         resumo_margem: (parseFloat(jdata.resumo_margem)).toString(),
                         resumo_presen: (parseFloat(jdata.resumo_presen)).toString(),
@@ -56,7 +56,7 @@ export async function POST(req: Request) {
                         resumo_desfil: jdata.resumo_desfil,
                         resumo_datmvt: jdata.resumo_datmvt,
                         resumo_yearmonth: (jdata.resumo_datmvt).slice(0, 6),
-                        resumo_valdev: jdata.resumo_valdev,
+                        resumo_valdev: (parseFloat(jdata.resumo_valdev)).toString(),
                         resumo_valven: (parseFloat(jdata.resumo_valven)).toString(),
                         resumo_margem: (parseFloat(jdata.resumo_margem)).toString(),
                         resumo_presen: (parseFloat(jdata.resumo_presen)).toString(),
@@ -108,11 +108,11 @@ export async function POST(req: Request) {
                         assoc_datmvt: jdata.assoc_datmvt,
                         assoc_ass: jdata.assoc_ass,
                         assoc_desass: jdata.assoc_desass,
-                        assoc_valdev: jdata.assoc_valdev,
-                        assoc_valven: jdata.assoc_valven,
+                        assoc_valdev: (parseFloat(jdata.assoc_valdev)).toString(),
+                        assoc_valven: (parseFloat(jdata.assoc_valven)).toString(),
                         assoc_margem: jdata.assoc_margem,
                         assoc_repres: jdata.assoc_repres,
-                        assoc_metdia: jdata.assoc_metdia,
+                        assoc_metdia: (parseFloat(jdata.assoc_metdia)).toString(),
                         organizationId: org.id
                     },
                 });
@@ -127,11 +127,11 @@ export async function POST(req: Request) {
                         assoc_datmvt: jdata.assoc_datmvt,
                         assoc_ass: jdata.assoc_ass,
                         assoc_desass: jdata.assoc_desass,
-                        assoc_valdev: jdata.assoc_valdev,
-                        assoc_valven: jdata.assoc_valven,
+                        assoc_valdev: (parseFloat(jdata.assoc_valdev)).toString(),
+                        assoc_valven: (parseFloat(jdata.assoc_valven)).toString(),
                         assoc_margem: jdata.assoc_margem,
                         assoc_repres: jdata.assoc_repres,
-                        assoc_metdia: jdata.assoc_metdia,
+                        assoc_metdia: (parseFloat(jdata.assoc_metdia)).toString(),
                         organizationId: org.id
                     }
                 });

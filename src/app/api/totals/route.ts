@@ -7,7 +7,7 @@ export async function POST(req: Request) {
 
         const { organization, company, date } = body;
 
-        const totals = await prisma.total.findFirst({
+        const totalsForDate = await prisma.total.findFirst({
             where: {
                 organizationId: organization,
                 total_filial: company,
@@ -15,7 +15,23 @@ export async function POST(req: Request) {
             },
         });
 
-        return NextResponse.json(totals, { status: 201 });
+
+        if (totalsForDate) {
+            return NextResponse.json(totalsForDate, { status: 201 });
+        } else {
+            const totalsLastDate = await prisma.total.findFirst({
+                where: {
+                    organizationId: organization,
+                    total_filial: company,
+                },
+                orderBy: {
+                    total_datatu: 'desc'
+                }
+            });
+            if (totalsLastDate) {
+                return NextResponse.json(totalsLastDate, { status: 201 });
+            }
+        }
     } catch (error) {
         return NextResponse.json({ error: 'Erro ao listar totais' }, { status: 500 });
     }

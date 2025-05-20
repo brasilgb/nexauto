@@ -32,12 +32,12 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function RadialChart({data, title}:any) {
-  
+export function RadialChart({ data, title }: any) {
+
   const chartData = [
     { browser: "safari", visitors: parseInt(data), fill: "var(--color-safari)" },
   ]
-  
+
   const chartConfig = {
     visitors: {
       label: 'visitors',
@@ -47,7 +47,7 @@ export function RadialChart({data, title}:any) {
       color: "var(--chart-2)",
     },
   } satisfies ChartConfig
-  
+
   return (
     <Card className="flex flex-col">
       {/* <CardHeader className="items-center pb-0">
@@ -57,21 +57,21 @@ export function RadialChart({data, title}:any) {
       <CardContent className="flex-1 pb-0">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[180px]"
+          className="mx-auto aspect-square max-h-[160px]"
         >
           <RadialBarChart
             data={chartData}
             startAngle={0}
-            endAngle={(data / 100) * 360 }
-            innerRadius={80}
-            outerRadius={110}
+            endAngle={(data / 100) * 360}
+            innerRadius={72}
+            outerRadius={100}
           >
             <PolarGrid
               gridType="circle"
               radialLines={false}
               stroke="none"
               className="first:fill-muted last:fill-background"
-              polarRadius={[86, 74]}
+              polarRadius={[79, 66]}
             />
             <RadialBar dataKey="visitors" background cornerRadius={10} />
             <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>

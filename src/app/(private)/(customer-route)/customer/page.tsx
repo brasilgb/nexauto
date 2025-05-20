@@ -1,79 +1,77 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
 import KpisDashboard from '../components/dashboard/kpis-dashboard'
 import RadialChartCustomer from '../components/dashboard/radial-chart-customer'
-import { Sales } from '@/src/types/sales';
-import { auth } from '@/auth';
 import { Totals } from '@/src/types/totals';
+import { useSession } from 'next-auth/react';
+import { useAppContext } from '@/src/contexts/AppContext';
+import moment from 'moment';
+import Loading from './loading';
+import CompositeChartApp from '../components/charts/CompositeChartApp';
 
-interface GetData {
-  org: string,
-  com: string;
-  dat: string;
-}
-
-async function getTotals({ org, com, dat }: GetData): Promise<Totals[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/totals`, {
-    cache: 'no-store',
-    method: 'POST',
-    headers: {
-      'Content-type': 'Application/json',
-      // Authorization: `Bearer ${session?.user?.token}`
-    },
-    body: JSON.stringify({
-      organization: org,
-      company: com,
-      date: dat
-    })
-  });
-
-  // if (!res.ok) {
-  //   throw new Error(`Erro ao listar totais: ${res.status}`);
-  // }
-  return res.json();
-};
-
-async function getSales({ org, com, dat }: GetData): Promise<Sales[]> {
-
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/sales`, {
-    cache: 'no-store',
-    method: 'POST',
-    headers: {
-      'Content-type': 'Application/json',
-      // Authorization: `Bearer ${session?.user?.token}`
-    },
-    body: JSON.stringify({
-      organization: org,
-      company: com,
-      date: dat
-    })
-  });
-
-  // if (!res.ok) {
-  //   throw new Error(`Erro ao listar vendas: ${res.status}`);
-  // }
-  return res.json();
-};
-
-export default async function Customer() {
-  const session = await auth() as any;
-
-  // Replace these values with actual data as needed
-  const params = { org: session?.user?.organizationId, com: '0', dat: '20240502' };
-
-  const sales = await getSales(params);
-  const totals = await getTotals(params);
+export default function Customer() {
+  const { data: session, status } = useSession();
+  const { selectedDate, companyNumber, setLoading, loading } = useAppContext();
+  const [totals, setTotals] = useState<Totals[]>([]);
+  const [chartSales, setChartSales] = useState<Totals[]>([]);
 
 
-  // const session = await auth();
-  // console.log(session);
+  useEffect(() => {
+    setLoading(true);
+    const getTotals = async () => {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/totals`, {
+        cache: 'no-store',
+        method: 'POST',
+        headers: {
+          'Content-type': 'Application/json',
+        },
+        body: JSON.stringify({
+          organization: session?.user?.organizationId,
+          company: companyNumber,
+          date: moment(selectedDate).format('YYYYMMDD')
+        })
+      }).then((res) => res.json())
+        .then((res) => setTotals(res))
+        .catch((err) => console.log(err))
+        .finally(() => setLoading(false));
+    };
+    getTotals();
+  }, [session, companyNumber, selectedDate]);
+
+  useEffect(() => {
+    setLoading(true);
+    const getChartSales = async () => {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/chartsales`, {
+        cache: 'no-store',
+        method: 'POST',
+        headers: {
+          'Content-type': 'Application/json',
+        },
+        body: JSON.stringify({
+          organization: session?.user?.organizationId,
+          company: companyNumber,
+          date: moment(selectedDate).format('YYYYMM')
+        })
+      }).then((res) => res.json())
+        .then((res) => setChartSales(res))
+        .catch((err) => console.log(err))
+        .finally(() => setLoading(false));
+    };
+    getChartSales();
+  }, [session, companyNumber, selectedDate]);
 
   return (
     <div className='flex flex-col gap-4'>
-      {totals ?
-        <>
-          <KpisDashboard data={totals} />
-          <RadialChartCustomer data={totals} />
-        </> : <span className='text-sm text-gray-600'>Ops, não há dados para gerar análises...</span>}
+      {loading ? <Loading />
+        :
+        totals ?
+          <>
+            <KpisDashboard data={totals} />
+            <RadialChartCustomer data={totals} />
+            <CompositeChartApp data={chartSales} />
+          </>
+          : <span className='text-sm text-gray-600'>Ops, não há dados para gerar análises...</span>}
     </div>
   )
+
 }

@@ -4,6 +4,8 @@ import FooterCustomer from '../components/footer/footer-customer';
 import { auth } from '@/auth';
 import FilterBar from '../components/filters/FilterBar';
 import { Company } from '@/src/types/company';
+import ClientSessionProvider from '@/src/components/app/ClientSessionProvider';
+import { Toaster } from '@/src/components/ui/sonner';
 
 async function getCompanies(): Promise<Company[]> {
 
@@ -27,9 +29,12 @@ export default async function CustomerLayout({ children }: { children: ReactNode
       <div>
         <FilterBar companies={companies} />
       </div>
-      <div className='flex-grow px-4 py-6 md:px-6'>
-        {children}
+      <div className='flex-grow px-4'>
+        <ClientSessionProvider>
+          {children}
+        </ClientSessionProvider>
       </div>
+      <Toaster />
       <FooterCustomer />
     </main>
   )

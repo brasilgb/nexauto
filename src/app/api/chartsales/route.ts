@@ -7,15 +7,35 @@ export async function POST(req: Request) {
 
         const { organization, company, yearmonth } = body;
 
-        const sales = await prisma.sale.findMany({
+        const salesForYearMonth = await prisma.sale.findMany({
             where: {
                 organizationId: organization,
                 resumo_codfil: company,
-                resumo_datmvt: yearmonth
+                resumo_yearmonth: yearmonth
             },
         });
+        if (salesForYearMonth.length > 0) {
+            return NextResponse.json(salesForYearMonth, { status: 201 });
+        } else {
+            const lastYearMonth = await prisma.sale.findFirst({
+                orderBy: {
+                    resumo_yearmonth: 'desc'
+                }
+            });
+            
+            const salesLastYearMonth = await prisma.sale.findMany({
+                where: {
+                    organizationId: organization,
+                    resumo_codfil: company,
+                    resumo_yearmonth: lastYearMonth?.resumo_yearmonth
+                }
+            });
+            if (salesLastYearMonth) {
+                return NextResponse.json(salesLastYearMonth, { status: 201 });
+            }
+        }
 
-        return NextResponse.json(sales, { status: 201 });
+
     } catch (error) {
         return NextResponse.json({ error: 'Erro ao listar vendas' }, { status: 500 });
     }
