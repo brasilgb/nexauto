@@ -11,9 +11,9 @@ import { User as Uicon } from 'lucide-react'
 import { Card } from '@/src/components/ui/card'
 import EditForm from '../../forms/edit-form'
 import { User } from '@/src/types/user'
-import { Organization } from '@/src/types/organization'
 import { Company } from '@/src/types/company'
 import { auth } from '@/auth'
+import { redirect } from 'next/navigation'
 
 
 async function getCompanies(org: string): Promise<Company[]> {
@@ -47,16 +47,21 @@ async function getUser(id: string): Promise<User[]> {
   return res.json();
 }
 
-
 export default async function EditUser({
   params,
 }: {
   params: Promise<{ id: string }>
 }) {
   const { id } = await params;
-  const usersys = await getUser(id);
+  const usersys = await getUser(id) as any;
   const session = await auth() as any;
   const companies = await getCompanies(session?.user?.organizationId);
+  if(usersys?.is_admin  && session?.user?.organizationId){
+    return redirect('/customer/users');
+  }
+  if (session?.user?.email !== usersys?.email && session?.user?.organizationId  && session?.user?.companyId) {
+    return redirect('/customer/users');
+  }
 
   return (
     <div>

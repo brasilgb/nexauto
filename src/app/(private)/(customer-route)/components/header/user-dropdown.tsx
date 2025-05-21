@@ -32,15 +32,15 @@ export function UserDropdow({username}: any) {
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
            <Link href={"/customer/users"}>
-            <User className="mr-2 h-4 w-4" />
+            <User className="h-4 w-4" />
             <span>Usuários</span>
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Form action={logoutAction}>
-            <button className="flex items-center gap-2">
+          <Form action={logoutAction} className="w-full">
+            <button className="flex items-center gap-2 w-full">
               <LogOut className="h-4 w-4" />
               <span>Sair</span>
             </button>

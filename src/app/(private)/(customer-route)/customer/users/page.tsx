@@ -21,6 +21,7 @@ interface GetData {
 
 async function getUsers({ org, com }: GetData): Promise<User[]> {
 
+  console.log(com, org);
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/customer`, {
     cache: 'no-store',
     method: 'POST',
@@ -43,7 +44,7 @@ export default async function Companies() {
   const session = await auth() as any;
   const params = { org: session?.user?.organizationId, com: session?.user?.companyId };
   const users = await getUsers(params);
-console.log(session?.user);
+  
   return (
     <div>
       <div className='flex items-center justify-between mb-6'>
@@ -54,7 +55,7 @@ console.log(session?.user);
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink href="/cudtomer">Home</BreadcrumbLink>
+                <BreadcrumbLink href="/customer">Home</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>

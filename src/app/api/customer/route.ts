@@ -7,18 +7,35 @@ export async function POST(req: Request) {
 
         const { organization, company } = body;
 
-        const customers = await prisma.user.findMany({
-            include: {
-                Organization: true,
-                Company: true,
-            },
-            where: {
-                organizationId: organization,
-                companyId: company
-            },
-        });
-
-        return NextResponse.json(customers, { status: 201 });
+        if (company && organization) {
+            const customersAll = await prisma.user.findMany({
+                include: {
+                    Organization: true,
+                    Company: true,
+                },
+                where: {
+                    organizationId: organization,
+                    companyId: company
+                },
+            });
+            if (customersAll.length > 0) {
+                return NextResponse.json(customersAll, { status: 201 });
+            }
+        } else {
+            if ( organization && !company ) {
+                const customersOrg = await prisma.user.findMany({
+                    include: {
+                        Organization: true,
+                    },
+                    where: {
+                        organizationId: organization,
+                    },
+                });
+                if (customersOrg.length > 0) {
+                    return NextResponse.json(customersOrg, { status: 201 });
+                }
+            }
+        }
 
     } catch (error) {
         return NextResponse.json({ error: 'Erro ao listar clientes' }, { status: 500 });

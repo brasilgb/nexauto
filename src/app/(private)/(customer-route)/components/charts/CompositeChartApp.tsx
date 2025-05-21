@@ -16,7 +16,9 @@ import {
     ChartTooltip,
     ChartTooltipContent,
 } from "@/src/components/ui/chart"
+
 import moment from "moment"
+import { maskMoney } from "@/src/lib/utils"
 
 export const description = "A bar chart"
 
@@ -67,11 +69,11 @@ export default function CompositeChartApp({ data }: ComposeChartProps) {
                                     </p>
                                     <p className="flex items-center gap-2">
                                         {name == 'margem' && <SquareCheck color={props.color} className={`w-4 h-4`} />}
-                                        {name == 'margem' && name + ': '  + (props.payload.pmargem).toFixed(2) + '%'}
+                                        {name == 'margem' && name + ': ' + (props.payload.pmargem).toFixed(2) + '%'}
                                     </p>
                                 </div>
                             )} />}
-                            //(value / props.payload.vendas) * 100
+                        //(value / props.payload.vendas) * 100
                         />
                         <Legend />
                         <CartesianGrid stroke="#f5f5f5" />
@@ -83,7 +85,7 @@ export default function CompositeChartApp({ data }: ComposeChartProps) {
             </CardContent>
             <CardFooter className="flex-col items-start gap-2 text-sm">
                 <div className="flex gap-2 font-medium leading-none">
-                    Sendo a meta de {(data[0]?.resumo_metdia)} para este mês. <TrendingUp className="h-4 w-4" />
+                    Sendo a meta diária de R$ {maskMoney(data[0]?.resumo_metdia)} para este mês. <TrendingUp className="h-4 w-4" />
                 </div>
                 <div className="leading-none text-muted-foreground">
                     Mostrando as vendas e as margens alcançadas para os {data?.length} dias do mês

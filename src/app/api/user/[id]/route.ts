@@ -38,8 +38,6 @@ export async function GET(request: Request, { params }: { params: { id: string }
     const paramid = await params;
     const { id } = paramid;
     const user = await findUser(id);
-
-    console.log(user);
     
     if (user instanceof NextResponse) {
         return user;

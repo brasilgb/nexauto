@@ -69,23 +69,26 @@ export default function Invoicing() {
 
   return (
     <>
-      {loading ? <Loading />
-        :
-        <Tabs defaultValue="summary">
-          <div className='w-full bg-gray-100 rounded-md p-1'>
-            <TabsList>
-              <TabsTrigger value="summary" className='text-base font-medium text-gray-600 cursor-pointer px-6 !rounded-sm'>Resumo</TabsTrigger>
-              <TabsTrigger value="association" className='text-base font-medium text-gray-600 cursor-pointer px-6 !rounded-sm'>Associação</TabsTrigger>
-            </TabsList>
-          </div>
-          <TabsContent value="summary" className='mt-4'>
-            {sales.length > 0 ? <Summary data={sales} /> : <span className='text-sm text-gray-600'>Ops, não há dados para gerar análises...</span>}
-          </TabsContent>
-          <TabsContent value="association" className='mt-4'>
-            {associations.length > 0 ? <Association data={associations} /> : <span className='text-sm text-gray-600'>Ops, não há dados para gerar análises...</span>}
-          </TabsContent>
-        </Tabs>
-      }
+      {loading && <Loading />}
+
+      <Tabs defaultValue="summary">
+        <div className='w-full bg-gray-100 rounded-md p-1'>
+          <TabsList>
+            <TabsTrigger value="summary" className='text-base font-medium text-gray-600 cursor-pointer px-6 !rounded-sm'>Resumo</TabsTrigger>
+            <TabsTrigger value="association" className='text-base font-medium text-gray-600 cursor-pointer px-6 !rounded-sm'>Associação</TabsTrigger>
+          </TabsList>
+        </div>
+        {!loading &&
+          <>
+            <TabsContent value="summary" className='mt-4'>
+              {sales.length > 0 ? <Summary data={sales} /> : <span className='text-sm text-gray-600'>Ops, não há dados para gerar análises...</span>}
+            </TabsContent>
+            <TabsContent value="association" className='mt-4'>
+              {associations.length > 0 ? <Association data={associations} /> : <span className='text-sm text-gray-600'>Ops, não há dados para gerar análises...</span>}
+            </TabsContent>
+          </>
+        }
+      </Tabs>
     </>
   )
 }

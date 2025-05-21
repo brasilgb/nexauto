@@ -38,6 +38,8 @@ export default async function registerAction(
 
     await prisma.user.create({
         data: {
+            organizationId: false,
+            companyId: false,
             email: data.email,
             name: data.name,
             password: hashSync(data.password),
