@@ -1,3 +1,5 @@
+import { auth } from "@/auth";
+import { Avatar, AvatarImage } from "@/src/components/ui/avatar";
 import {
     Sidebar,
     SidebarContent,
@@ -10,21 +12,26 @@ import {
 } from "@/src/components/ui/sidebar"
 import { Setting } from "@/src/types/setting";
 import { Building, Building2, Calendar, Home, Inbox, Search, Settings, SlidersHorizontal, User } from "lucide-react"
+import Link from "next/link";
 
-async function getSetting(): Promise<Setting[]> {
+async function getSetting(organization: any): Promise<Setting[]> {
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/setting`, {
-        cache: 'no-store'
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/setting/${organization}`, {
+        cache: 'no-store',
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
     });
 
-    if (!res.ok) {
-        throw new Error(`Erro ao listar configuraões: ${res.status}`);
-    }
 
     return res.json();
 }
 
 export async function AppSidebar() {
+
+    const session = await auth();
+    const settings = await getSetting(session?.user?.organizationId) as any;
 
     const items = [
         {
@@ -54,11 +61,6 @@ export async function AppSidebar() {
         },
     ]
 
-
-
-    const settings = await getSetting() as any;
-
-
     return (
         <Sidebar side='left' variant='sidebar' collapsible='icon' >
             <SidebarHeader>
@@ -68,10 +70,11 @@ export async function AppSidebar() {
                             asChild
                             className="data-[slot=sidebar-menu-button]:!p-1.5"
                         >
-                            <a href="#">
-                                <Building className="h-5 w-5" />
-                                <span className="text-base font-semibold">Acme Inc.</span>
-                            </a>
+                            <Link href="/customer">
+                                <Avatar>
+                                    <AvatarImage src={process.env.NEXT_PUBLIC_API_URL + `${settings?.logo ? settings?.logo : 'images/not-image.jpg'}`} alt={settings?.name} />
+                                </Avatar>
+                            </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>

@@ -13,6 +13,7 @@ import { SettingForm } from './setting-form'
 import Image from 'next/image';
 import { Setting } from '@/src/types/setting'
 import { auth } from '@/auth'
+import { redirect } from 'next/navigation'
 
 async function getSetting(): Promise<Setting[]> {
 const session = await auth();
@@ -34,9 +35,13 @@ const session = await auth();
 }
 
 export default async function Settings() {
-
+  const session = await auth();
   const settings = await getSetting() as any;
 
+  // Replace 'companyId' with the correct property from your session object, e.g., 'user?.organizationId'
+  if (session?.user?.companyId) {
+      redirect('/customer');
+  }
   return (
     <div>
       <div className='flex items-center justify-between mb-6'>

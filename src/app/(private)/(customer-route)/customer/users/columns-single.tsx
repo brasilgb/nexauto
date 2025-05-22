@@ -101,7 +101,6 @@ export const columns: ColumnDef<User>[] = [
               <Edit />
             </Link>
           </Button>
-          <DeleteAlertDialog deleteId={user.id} module="user" route="/customer/users" name="usuário" />
         </div>
       )
     }

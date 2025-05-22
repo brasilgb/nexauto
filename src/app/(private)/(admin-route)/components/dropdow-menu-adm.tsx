@@ -15,26 +15,32 @@ import {
     DropdownMenuSubTrigger,
     DropdownMenuTrigger,
 } from "@/src/components/ui/dropdown-menu"
-import { LogOut, User } from "lucide-react";
+import { LogOut, Logs, User } from "lucide-react";
 import Form from "next/form"
+import Link from "next/link";
 
 
 export async function DropdowMenuAdm() {
     const session = await auth();
-    
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="outline"><User className="h-4 w-4"/></Button>
+                <Button variant="outline"><User className="h-4 w-4" /></Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
                 <DropdownMenuLabel className="flex items-center gap-2">
                     <User className="h-4 w-4" />
-                {session?.user?.name}
+                    {session?.user?.name}
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem className="flex items-center gap-2">
-                    <User className="h-4 w-4" />Profile
+                    <DropdownMenuItem asChild>
+                        <Link href={"/customer/logs"}>
+                            <Logs className="h-4 w-4" />
+                            <span>Logs</span>
+                        </Link>
+                    </DropdownMenuItem>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>

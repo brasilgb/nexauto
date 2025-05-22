@@ -9,10 +9,11 @@ import {
 } from "@/src/components/ui/breadcrumb"
 import { User as Uicon } from 'lucide-react'
 import { Card } from '@/src/components/ui/card'
-import { columns } from './columns'
 import { User } from '@/src/types/user'
 import { DataTable } from '../../../(admin-route)/components/data-table'
 import { auth } from '@/auth'
+import { columns } from './columns'
+import { columns as single } from './columns-single'
 
 interface GetData {
   org: string;
@@ -43,6 +44,7 @@ export default async function Companies() {
   const session = await auth() as any;
   const params = { org: session?.user?.organizationId, com: session?.user?.companyId };
   const users = await getUsers(params);
+  console.log(session);
   
   return (
     <div>
@@ -66,7 +68,7 @@ export default async function Companies() {
       </div>
 
       <Card className='p-4'>
-        <DataTable columns={columns} data={users} label="Usuário" link='/customer/users/add-user' filter='name' />
+        <DataTable columns={session?.user?.companyId ? single : columns} data={users} label="Usuário" link='/customer/users/add-user' filter='name' />
       </Card>
     </div>
   )
