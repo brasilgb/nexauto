@@ -5,17 +5,39 @@ import { writeFile } from 'fs/promises';
 import path from 'path';
 import fs from 'fs';
 
-const settingSchema = z.object({
-    name: z.string(),
-    logo: z.any(),
-});
-
 // Configuração para o formidable (upload de arquivos)
 export const config = {
     api: {
         bodyParser: false, // Desabilita o bodyParser padrão do Next.js para lidar com FormData
     },
 };
+
+async function findSetting(organization: string) {
+
+    try {
+        const organizationSetting = await prisma.setting.findFirst({
+            where: { organizationId: organization },
+        });
+        
+        return organizationSetting;
+
+    } catch (error) {
+        console.error('Erro ao buscar configurações:', error);
+        return NextResponse.json({ error: 'Erro ao buscar configurações' }, { status: 500 });
+    }
+}
+
+export async function GET(request: Request, { params }: { params: { organization: string } }) {
+
+    const paramid = await params;
+    const { organization } = paramid;
+    const org = await findSetting(organization);
+    
+    if (org instanceof NextResponse) {
+        return org;
+    }
+    return NextResponse.json(org);
+}
 
 // Função auxiliar para salvar a imagem (exemplo de salvamento local - ADAPTAR PARA SEU STORAGE)
 async function saveImage(file: File): Promise<string | null> {
@@ -42,6 +64,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
         const formData = await request.formData();
         const name = formData.get('name') as string | null;
         const logoFile = formData.get('logo') as File | null;
+        const organizationId = formData.get('organizationId') as string | null;
 
         if (!name) {
             return NextResponse.json({ error: 'O nome é obrigatório.' }, { status: 400 });
@@ -75,6 +98,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
         const updatedProfile = await prisma.setting.update({
             where: { id: id }, // Use o ID do usuário correto
             data: {
+                organizationId,
                 name,
                 logo: logoFile ? imageUrl : logoExist?.logo,
             },

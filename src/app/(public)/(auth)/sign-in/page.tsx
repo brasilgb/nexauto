@@ -20,24 +20,33 @@ export default async function SignInPage() {
     return redirect('/customer')
   }
 
+  const greetingMessage = () => {
+    //let h = new Date().toLocaleTimeString('pt-BR', { hour: 'numeric', hour12: false }); 
+    let h = new Date().getHours();
+    switch (true) {
+      case h <= 5: return 'Olá! Você está acordado(a)? Pronto(a) para analisar dados?';
+      case h < 12: return 'Bom dia! Pronto(a) para transformar dados em decisões estratégicas?';
+      case h < 18: return 'Boa tarde! Acesse e continue a explorar suas métricas.';
+      default: return 'Boa noite! Mesmo tarde, os dados não param.';
+    }
+  }
+
   return (
     <>
-      <Card className="max-w-sm w-full rounded-2xl mt-12">
+      <Card className="max-w-sm w-full rounded-2xl md:shadow-none md:border-0 md:bg-accent relative">
         <CardHeader>
-          <h2 className="text-xl font-bold">Boas Vindas</h2>
-          <CardDescription>Faça seu login com email e senha.</CardDescription>
+          <div className='flex items-center justify-center mb-4'>
+            <div className='p-4 bg-white w-32 h-32 rounded-full flex items-center justify-center'>
+              <img src="/images/analytcs.png" alt="Logo" className="object-cover rounded-2xl" />
+            </div>
+          </div>
+          <h2 className="text-base font-bold text-gray-700">{greetingMessage()}</h2>
+          <CardDescription>Faça seu login com email e senha para continuar.</CardDescription>
         </CardHeader>
         <CardContent>
           <LoginForm />
         </CardContent>
       </Card>
-      <p className="text-sm text-muted-foreground mt-3">
-        Não possui cadastro?{' '}
-        <Link className="text-gray-800 hover:underline" href="/cadastro">
-          Registre-se
-        </Link>
-        .
-      </p>
     </>
   );
 }

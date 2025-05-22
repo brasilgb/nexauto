@@ -13,7 +13,7 @@ export default async function CustomerLayout({ children }: { children: ReactNode
   return (
     <main className='flex flex-col min-h-screen'>
         <ClientSessionProvider>
-        <HeaderCustomer username={session?.user?.name} />
+        <HeaderCustomer userdata={session?.user} />
         <div>
           <FilterBar />
         </div>

@@ -32,7 +32,7 @@ interface DataTableProps<TData, TValue> {
     data: TData[]
     label: string
     link: string
-    filter:string
+    filter: string
 }
 
 export function DataTable<TData, TValue>({
@@ -81,12 +81,15 @@ export function DataTable<TData, TValue>({
                     }
                     className="max-w-sm"
                 />
+                {!(data[0] as any).companyId &&
                 <Button asChild>
                     <Link href={link}>
-                    <Plus />{label}
+                        <Plus />{label}
                     </Link>
-                    </Button>
+                </Button>
+                }
             </div>
+
             <div className="rounded-md border">
                 <Table>
                     <TableHeader>

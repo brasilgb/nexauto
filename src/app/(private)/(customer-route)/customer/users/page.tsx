@@ -21,7 +21,6 @@ interface GetData {
 
 async function getUsers({ org, com }: GetData): Promise<User[]> {
 
-  console.log(com, org);
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/customer`, {
     cache: 'no-store',
     method: 'POST',

@@ -1,9 +1,17 @@
 import prisma from '@/src/lib/prisma';
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function POST(req: Request) {
+    const body = await req.json();
+
+    const { organization } = body;
     try {
-        const existSetting = await prisma.setting.count();
+
+        const existSetting = await prisma.setting.count({
+            where: {
+                organizationId: organization
+            }
+        });
         if (!existSetting) {
             await prisma.setting.create({
                 data: {
@@ -12,6 +20,7 @@ export async function GET() {
                 }
             })
         }
+
         const listSetting = await prisma.setting.findFirst();
 
         return NextResponse.json(listSetting);

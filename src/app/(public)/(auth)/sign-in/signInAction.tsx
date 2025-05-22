@@ -9,7 +9,7 @@ export default async function signInAction(_prevState: any, formData: FormData) 
             email: formData.get('email') as string,
             password: formData.get('password') as string,
             redirect: true,
-            // redirectTo: '/admin',
+            redirectTo: '/admin',
         });
         return { success: true };
 
