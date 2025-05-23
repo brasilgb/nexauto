@@ -1,3 +1,4 @@
+import { createLogEntry } from '@/src/lib/logService';
 import prisma from '@/src/lib/prisma';
 import { NextResponse } from "next/server";
 
@@ -6,12 +7,15 @@ export async function POST(req: Request) {
 
     if (data.type === 'venda') {
         let sale = false;
+        let numcomp = (parseInt(data.jdata[1].resumo_codfil)).toString();
         const org = await prisma.organization.findFirst({
             where: {
                 cnpj: data.jdata[0].resumo_cnpj,
             },
             select: {
-                id: true
+                id: true,
+                name: true,
+                cnpj: true,
             },
         });
 
@@ -68,20 +72,37 @@ export async function POST(req: Request) {
             }
         }
         if (sale) {
+            createLogEntry({
+                action: 'CREATE_SALES',
+                message: `Dados de venda (Organização ID: ${org.cnpj}) inseridos com sucesso.`,
+                organization: org.name,
+                organizationId: org.id,
+                company: numcomp,
+            });
             return NextResponse.json({ message: 'Dados da venda inseridos com sucesso!' }, { status: 200 });
         } else {
+            createLogEntry({
+                action: 'EDIT_SALES',
+                message: `Dados de venda (Organização ID: ${org.cnpj}) atualizados com sucesso.`,
+                organization: org.name,
+                organizationId: org.id,
+                company: numcomp,
+            });
             return NextResponse.json({ message: 'Dados da venda atualizados com sucesso!' }, { status: 201 });
         }
     }
 
     if (data.type === 'assoc') {
         let assoc = false;
+        let numcomp = (parseInt(data.jdata[1].assoc_filial)).toString();
         const org = await prisma.organization.findFirst({
             where: {
                 cnpj: data.jdata[0].assoc_cnpj, // Ensure 'resumo_cnpj' corresponds to the 'id' field or adjust schema
             },
             select: {
-                id: true
+                id: true,
+                name: true,
+                cnpj: true,
             },
         });
 
@@ -118,7 +139,6 @@ export async function POST(req: Request) {
                 });
                 assoc = false;
             } else {
-                //assoc_cnpj;assoc_filial;assoc_datmvt;assoc_ass;assoc_desass;assoc_valdev;assoc_valven;assoc_margem;assoc_repres;assoc_metdia;
                 await prisma.association.createMany({
                     data: {
                         id: org.id + jdata.assoc_filial + jdata.assoc_cnpj + jdata.assoc_datmvt + jdata.assoc_ass,
@@ -139,20 +159,38 @@ export async function POST(req: Request) {
             }
         }
         if (assoc) {
+            createLogEntry({
+                action: 'CREATE_ASSOCIATION',
+                message: `Dados de associação da (Organização ID: ${org.cnpj}) inseridos com sucesso.`,
+                organization: org.name,
+                organizationId: org.id,
+                company: numcomp,
+            });
             return NextResponse.json({ message: 'Dados da associação inseridos com sucesso!' }, { status: 200 });
         } else {
+            createLogEntry({
+                action: 'EDIT_ASSOCIATION',
+                message: `Dados de venda da (Organização ID: ${org.cnpj}) atualizados com sucesso.`,
+                organization: org.name,
+                organizationId: org.id,
+                company: numcomp,
+            });
             return NextResponse.json({ message: 'Dados da associação atualizados com sucesso!' }, { status: 201 });
         }
     }
 
     if (data.type === 'total') {
         let total = false;
+        
+        let numcomp = (parseInt(data.jdata[1].total_filial)).toString();
         const org = await prisma.organization.findFirst({
             where: {
                 cnpj: data.jdata[0].total_cnpj, // Ensure 'resumo_cnpj' corresponds to the 'id' field or adjust schema
             },
             select: {
-                id: true
+                id: true,
+                name: true,
+                cnpj: true,
             },
         });
 
@@ -217,8 +255,22 @@ export async function POST(req: Request) {
             }
         }
         if (total) {
+            createLogEntry({
+                action: 'CREATE_TOTALS',
+                message: `Dados totais da (Organização ID: ${org.cnpj}) foi inserido com sucesso.`,
+                organization: org.name,
+                organizationId: org.id,
+                company: numcomp,
+            });
             return NextResponse.json({ message: 'Dados totais inseridos com sucesso!' }, { status: 200 });
         } else {
+            createLogEntry({
+                action: 'EDIT_TOTALS',
+                message: `Dados totais da (Organização ID: ${org.cnpj}) foi atualizados com sucesso.`,
+                organization: org.name,
+                organizationId: org.id,
+                company: numcomp,
+            });
             return NextResponse.json({ message: 'Dados totais atualizados com sucesso!' }, { status: 201 });
         }
     }

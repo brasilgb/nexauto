@@ -5,6 +5,8 @@ export async function POST(req: Request) {
     const body = await req.json();
 
     const { organization } = body;
+
+
     try {
 
         const existSetting = await prisma.setting.count({
@@ -21,7 +23,11 @@ export async function POST(req: Request) {
             })
         }
 
-        const listSetting = await prisma.setting.findFirst();
+        const listSetting = await prisma.setting.findFirst({
+            where: {
+                organizationId: organization
+            }
+        });
 
         return NextResponse.json(listSetting);
     } catch (error) {

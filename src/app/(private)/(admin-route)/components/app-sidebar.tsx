@@ -24,7 +24,6 @@ async function getSetting(organization: any): Promise<Setting[]> {
         }
     });
 
-
     return res.json();
 }
 
@@ -84,10 +83,10 @@ export async function AppSidebar() {
                     {items.map((item) => (
                         <SidebarMenuItem key={item.title}>
                             <SidebarMenuButton asChild>
-                                <a href={item.url}>
+                                <Link href={item.url}>
                                     <item.icon />
                                     <span>{item.title}</span>
-                                </a>
+                                </Link>
                             </SidebarMenuButton>
                         </SidebarMenuItem>
                     ))}

@@ -81,7 +81,7 @@ export function DataTable<TData, TValue>({
                     }
                     className="max-w-sm"
                 />
-                {!(data[0] as any).companyId &&
+                {!(data as any).companyId &&
                 <Button asChild>
                     <Link href={link}>
                         <Plus />{label}

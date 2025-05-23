@@ -12,11 +12,18 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/src/components/ui/c
 import { SettingForm } from './setting-form'
 import Image from 'next/image';
 import { Setting } from '@/src/types/setting'
+import { auth } from '@/auth'
 
 async function getSetting(): Promise<Setting[]> {
-
+const session = await auth();
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/setting`, {
-    cache: 'no-store'
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      organization: session?.user?.organizationId,
+    }),
   });
 
   if (!res.ok) {

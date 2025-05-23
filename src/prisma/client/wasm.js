@@ -227,9 +227,25 @@ exports.Prisma.TotalScalarFieldEnum = {
   organizationId: 'organizationId'
 };
 
+exports.Prisma.ActivityLogScalarFieldEnum = {
+  id: 'id',
+  timestamp: 'timestamp',
+  action: 'action',
+  message: 'message',
+  organization: 'organization',
+  company: 'company',
+  details: 'details',
+  organizationId: 'organizationId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.NullsOrder = {
@@ -328,6 +344,26 @@ exports.Prisma.TotalOrderByRelevanceFieldEnum = {
   organizationId: 'organizationId'
 };
 
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
+exports.Prisma.ActivityLogOrderByRelevanceFieldEnum = {
+  id: 'id',
+  action: 'action',
+  message: 'message',
+  organization: 'organization',
+  company: 'company',
+  organizationId: 'organizationId'
+};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
@@ -336,7 +372,8 @@ exports.Prisma.ModelName = {
   Setting: 'Setting',
   Sale: 'Sale',
   Association: 'Association',
-  Total: 'Total'
+  Total: 'Total',
+  ActivityLog: 'ActivityLog'
 };
 
 /**

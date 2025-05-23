@@ -13,14 +13,14 @@ export const config = {
 };
 
 async function findSetting(organization: string) {
-
+    
     try {
         const organizationSetting = await prisma.setting.findFirst({
             where: { organizationId: organization },
         });
         
         return organizationSetting;
-
+        
     } catch (error) {
         console.error('Erro ao buscar configurações:', error);
         return NextResponse.json({ error: 'Erro ao buscar configurações' }, { status: 500 });
@@ -28,7 +28,7 @@ async function findSetting(organization: string) {
 }
 
 export async function GET(request: Request, { params }: { params: { organization: string } }) {
-
+    
     const paramid = await params;
     const { organization } = paramid;
     const org = await findSetting(organization);

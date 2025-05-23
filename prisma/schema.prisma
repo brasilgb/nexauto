@@ -47,6 +47,7 @@ model Organization {
   Sale        Sale[]
   Association Association[]
   Total       Total[]
+  ActivityLog ActivityLog[]
 
   @@map("organizations")
 }
@@ -124,8 +125,8 @@ model Association {
   assoc_repres String
   assoc_metdia String
 
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 
   Organization   Organization? @relation(fields: [organizationId], references: [id])
   organizationId String?
@@ -149,12 +150,25 @@ model Total {
   total_perina String
   total_valest String
   total_meta   String
-  
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @default(now())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 
   Organization   Organization? @relation(fields: [organizationId], references: [id])
   organizationId String?
 
   @@map("totals")
+}
+
+model ActivityLog {
+  id             String        @id @default(cuid())
+  timestamp      DateTime      @default(now())
+  action         String
+  message        String
+  organization   String
+  company        String
+  details        Json?
+  
+  Organization   Organization? @relation(fields: [organizationId], references: [id])
+  organizationId String?
 }

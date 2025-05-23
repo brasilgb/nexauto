@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AppProvider } from "../contexts/AppContext";
+import { Roboto, Poppins } from 'next/font/google';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+    const roboto = Roboto({
+      weight: '400', // Or use variable fonts for better performance
+      subsets: ['latin'],
+      variable: '--font-roboto', // Optional: Define a CSS variable
+    });
+    const poppins = Roboto({
+      weight: '400', // Or use variable fonts for better performance
+      subsets: ['latin'],
+      variable: '--font-poppins', // Optional: Define a CSS variable
+    });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`antialiased ${poppins.className} ${roboto.className}`}
       >
         <AppProvider>
           {children}

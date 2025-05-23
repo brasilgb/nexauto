@@ -18,17 +18,18 @@ async function getOrganizations(): Promise<Organization[]> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/organization`, {
     cache: 'no-store'
   });
- 
+
   if (!res.ok) {
     throw new Error(`Erro ao listar organizações: ${res.status}`);
   }
+
   return res.json();
 };
 
 export default async function Organizations() {
 
   const organizations = await getOrganizations();
-
+ 
   return (
     <div>
       <div className='flex items-center justify-between mb-6'>
