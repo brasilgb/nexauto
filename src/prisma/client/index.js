@@ -87,9 +87,6 @@ Prisma.NullTypes = {
  * Enums
  */
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
-  ReadUncommitted: 'ReadUncommitted',
-  ReadCommitted: 'ReadCommitted',
-  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
 
@@ -226,97 +223,6 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 
-exports.Prisma.UserOrderByRelevanceFieldEnum = {
-  id: 'id',
-  name: 'name',
-  email: 'email',
-  password: 'password',
-  roles: 'roles',
-  organizationId: 'organizationId',
-  companyId: 'companyId'
-};
-
-exports.Prisma.OrganizationOrderByRelevanceFieldEnum = {
-  id: 'id',
-  name: 'name',
-  cnpj: 'cnpj'
-};
-
-exports.Prisma.CompanyOrderByRelevanceFieldEnum = {
-  id: 'id',
-  corpreason: 'corpreason',
-  cnpj: 'cnpj',
-  subnumber: 'subnumber',
-  subname: 'subname',
-  cep: 'cep',
-  state: 'state',
-  city: 'city',
-  district: 'district',
-  street: 'street',
-  number: 'number',
-  complement: 'complement',
-  telefone: 'telefone',
-  whatsapp: 'whatsapp',
-  observation: 'observation',
-  organizationId: 'organizationId'
-};
-
-exports.Prisma.SettingOrderByRelevanceFieldEnum = {
-  id: 'id',
-  name: 'name',
-  logo: 'logo',
-  organizationId: 'organizationId'
-};
-
-exports.Prisma.SaleOrderByRelevanceFieldEnum = {
-  id: 'id',
-  resumo_cnpj: 'resumo_cnpj',
-  resumo_codfil: 'resumo_codfil',
-  resumo_desfil: 'resumo_desfil',
-  resumo_datmvt: 'resumo_datmvt',
-  resumo_yearmonth: 'resumo_yearmonth',
-  resumo_valdev: 'resumo_valdev',
-  resumo_valven: 'resumo_valven',
-  resumo_margem: 'resumo_margem',
-  resumo_presen: 'resumo_presen',
-  resumo_metdia: 'resumo_metdia',
-  organizationId: 'organizationId'
-};
-
-exports.Prisma.AssociationOrderByRelevanceFieldEnum = {
-  id: 'id',
-  assoc_cnpj: 'assoc_cnpj',
-  assoc_filial: 'assoc_filial',
-  assoc_datmvt: 'assoc_datmvt',
-  assoc_ass: 'assoc_ass',
-  assoc_desass: 'assoc_desass',
-  assoc_valdev: 'assoc_valdev',
-  assoc_valven: 'assoc_valven',
-  assoc_margem: 'assoc_margem',
-  assoc_repres: 'assoc_repres',
-  assoc_metdia: 'assoc_metdia',
-  organizationId: 'organizationId'
-};
-
-exports.Prisma.TotalOrderByRelevanceFieldEnum = {
-  id: 'id',
-  total_cnpj: 'total_cnpj',
-  total_datatu: 'total_datatu',
-  total_filial: 'total_filial',
-  total_valdev: 'total_valdev',
-  total_valven: 'total_valven',
-  total_margem: 'total_margem',
-  total_permet: 'total_permet',
-  total_projec: 'total_projec',
-  total_valjur: 'total_valjur',
-  total_perjur: 'total_perjur',
-  total_valina: 'total_valina',
-  total_perina: 'total_perina',
-  total_valest: 'total_valest',
-  total_meta: 'total_meta',
-  organizationId: 'organizationId'
-};
-
 exports.Prisma.JsonNullValueFilter = {
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull,
@@ -326,15 +232,6 @@ exports.Prisma.JsonNullValueFilter = {
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
-};
-
-exports.Prisma.ActivityLogOrderByRelevanceFieldEnum = {
-  id: 'id',
-  action: 'action',
-  message: 'message',
-  organization: 'organization',
-  company: 'company',
-  organizationId: 'organizationId'
 };
 
 
@@ -386,8 +283,7 @@ const config = {
   "datasourceNames": [
     "db"
   ],
-  "activeProvider": "mysql",
-  "postinstall": false,
+  "activeProvider": "sqlite",
   "inlineDatasources": {
     "db": {
       "url": {
@@ -396,8 +292,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/prisma/client\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id       String  @id @default(uuid())\n  name     String\n  email    String\n  password String\n  is_admin Boolean\n  roles    String\n  status   Boolean\n\n  createdAt      DateTime      @default(now())\n  updatedAt      DateTime      @default(now())\n  Organization   Organization? @relation(fields: [organizationId], references: [id])\n  organizationId String?\n  Company        Company?      @relation(fields: [companyId], references: [id])\n  companyId      String?\n\n  @@map(\"users\")\n}\n\nmodel Organization {\n  id     String  @id @default(uuid())\n  name   String\n  cnpj   String\n  status Boolean\n\n  createdAt   DateTime      @default(now())\n  updatedAt   DateTime      @default(now())\n  companies   Company[]\n  users       User[]\n  Setting     Setting[]\n  Sale        Sale[]\n  Association Association[]\n  Total       Total[]\n  ActivityLog ActivityLog[]\n\n  @@map(\"organizations\")\n}\n\nmodel Company {\n  id          String  @id @default(uuid())\n  corpreason  String?\n  cnpj        String\n  subnumber   String\n  subname     String\n  cep         String\n  state       String\n  city        String\n  district    String?\n  street      String?\n  number      String?\n  complement  String?\n  telefone    String\n  status      Boolean\n  whatsapp    String?\n  observation String?\n\n  createdAt      DateTime      @default(now())\n  updatedAt      DateTime      @default(now())\n  Organization   Organization? @relation(fields: [organizationId], references: [id])\n  organizationId String?\n\n  users User[]\n\n  @@map(\"companies\")\n}\n\nmodel Setting {\n  id   String  @id @default(uuid())\n  name String?\n  logo String?\n\n  Organization   Organization? @relation(fields: [organizationId], references: [id])\n  organizationId String?\n\n  @@map(\"settings\")\n}\n\nmodel Sale {\n  id               String @id\n  resumo_cnpj      String\n  resumo_codfil    String\n  resumo_desfil    String\n  resumo_datmvt    String\n  resumo_yearmonth String\n  resumo_valdev    String\n  resumo_valven    String\n  resumo_margem    String\n  resumo_presen    String\n  resumo_metdia    String\n\n  createdAt      DateTime      @default(now())\n  updatedAt      DateTime      @default(now())\n  Organization   Organization? @relation(fields: [organizationId], references: [id])\n  organizationId String?\n\n  @@map(\"sales\")\n}\n\nmodel Association {\n  id           String @id\n  assoc_cnpj   String\n  assoc_filial String\n  assoc_datmvt String\n  assoc_ass    String\n  assoc_desass String\n  assoc_valdev String\n  assoc_valven String\n  assoc_margem String\n  assoc_repres String\n  assoc_metdia String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @default(now())\n\n  Organization   Organization? @relation(fields: [organizationId], references: [id])\n  organizationId String?\n\n  @@map(\"associations\")\n}\n\nmodel Total {\n  id           String @id\n  total_cnpj   String\n  total_datatu String\n  total_filial String\n  total_valdev String\n  total_valven String\n  total_margem String\n  total_permet String\n  total_projec String\n  total_valjur String\n  total_perjur String\n  total_valina String\n  total_perina String\n  total_valest String\n  total_meta   String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @default(now())\n\n  Organization   Organization? @relation(fields: [organizationId], references: [id])\n  organizationId String?\n\n  @@map(\"totals\")\n}\n\nmodel ActivityLog {\n  id           String   @id @default(cuid())\n  timestamp    DateTime @default(now())\n  action       String\n  message      String\n  organization String\n  company      String\n  details      Json?\n\n  Organization   Organization? @relation(fields: [organizationId], references: [id])\n  organizationId String?\n}\n",
-  "inlineSchemaHash": "1c37a7b21054e8ade74cc7216eaf08a81554cde3a46934f529dfd68657d1d797",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/prisma/client\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id       String  @id @default(uuid())\n  name     String\n  email    String\n  password String\n  is_admin Boolean\n  roles    String\n  status   Boolean\n\n  createdAt      DateTime      @default(now())\n  updatedAt      DateTime      @default(now())\n  Organization   Organization? @relation(fields: [organizationId], references: [id])\n  organizationId String?\n  Company        Company?      @relation(fields: [companyId], references: [id])\n  companyId      String?\n\n  @@map(\"users\")\n}\n\nmodel Organization {\n  id     String  @id @default(uuid())\n  name   String\n  cnpj   String\n  status Boolean\n\n  createdAt   DateTime      @default(now())\n  updatedAt   DateTime      @default(now())\n  companies   Company[]\n  users       User[]\n  Setting     Setting[]\n  Sale        Sale[]\n  Association Association[]\n  Total       Total[]\n  ActivityLog ActivityLog[]\n\n  @@map(\"organizations\")\n}\n\nmodel Company {\n  id          String  @id @default(uuid())\n  corpreason  String?\n  cnpj        String\n  subnumber   String\n  subname     String\n  cep         String\n  state       String\n  city        String\n  district    String?\n  street      String?\n  number      String?\n  complement  String?\n  telefone    String\n  status      Boolean\n  whatsapp    String?\n  observation String?\n\n  createdAt      DateTime      @default(now())\n  updatedAt      DateTime      @default(now())\n  Organization   Organization? @relation(fields: [organizationId], references: [id])\n  organizationId String?\n\n  users User[]\n\n  @@map(\"companies\")\n}\n\nmodel Setting {\n  id   String  @id @default(uuid())\n  name String?\n  logo String?\n\n  Organization   Organization? @relation(fields: [organizationId], references: [id])\n  organizationId String?\n\n  @@map(\"settings\")\n}\n\nmodel Sale {\n  id               String @id\n  resumo_cnpj      String\n  resumo_codfil    String\n  resumo_desfil    String\n  resumo_datmvt    String\n  resumo_yearmonth String\n  resumo_valdev    String\n  resumo_valven    String\n  resumo_margem    String\n  resumo_presen    String\n  resumo_metdia    String\n\n  createdAt      DateTime      @default(now())\n  updatedAt      DateTime      @default(now())\n  Organization   Organization? @relation(fields: [organizationId], references: [id])\n  organizationId String?\n\n  @@map(\"sales\")\n}\n\nmodel Association {\n  id           String @id\n  assoc_cnpj   String\n  assoc_filial String\n  assoc_datmvt String\n  assoc_ass    String\n  assoc_desass String\n  assoc_valdev String\n  assoc_valven String\n  assoc_margem String\n  assoc_repres String\n  assoc_metdia String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @default(now())\n\n  Organization   Organization? @relation(fields: [organizationId], references: [id])\n  organizationId String?\n\n  @@map(\"associations\")\n}\n\nmodel Total {\n  id           String @id\n  total_cnpj   String\n  total_datatu String\n  total_filial String\n  total_valdev String\n  total_valven String\n  total_margem String\n  total_permet String\n  total_projec String\n  total_valjur String\n  total_perjur String\n  total_valina String\n  total_perina String\n  total_valest String\n  total_meta   String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @default(now())\n\n  Organization   Organization? @relation(fields: [organizationId], references: [id])\n  organizationId String?\n\n  @@map(\"totals\")\n}\n\nmodel ActivityLog {\n  id           String   @id @default(cuid())\n  timestamp    DateTime @default(now())\n  action       String\n  message      String\n  organization String\n  company      String\n  details      Json?\n\n  Organization   Organization? @relation(fields: [organizationId], references: [id])\n  organizationId String?\n}\n",
+  "inlineSchemaHash": "7bc458d4c5d466052400e3a440a91ac9a928f792b35efd4af59b21942f603aaa",
   "copyEngine": true
 }
 

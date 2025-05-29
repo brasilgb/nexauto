@@ -114,9 +114,6 @@ Prisma.NullTypes = {
  */
 
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
-  ReadUncommitted: 'ReadUncommitted',
-  ReadCommitted: 'ReadCommitted',
-  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
 
@@ -253,97 +250,6 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 
-exports.Prisma.UserOrderByRelevanceFieldEnum = {
-  id: 'id',
-  name: 'name',
-  email: 'email',
-  password: 'password',
-  roles: 'roles',
-  organizationId: 'organizationId',
-  companyId: 'companyId'
-};
-
-exports.Prisma.OrganizationOrderByRelevanceFieldEnum = {
-  id: 'id',
-  name: 'name',
-  cnpj: 'cnpj'
-};
-
-exports.Prisma.CompanyOrderByRelevanceFieldEnum = {
-  id: 'id',
-  corpreason: 'corpreason',
-  cnpj: 'cnpj',
-  subnumber: 'subnumber',
-  subname: 'subname',
-  cep: 'cep',
-  state: 'state',
-  city: 'city',
-  district: 'district',
-  street: 'street',
-  number: 'number',
-  complement: 'complement',
-  telefone: 'telefone',
-  whatsapp: 'whatsapp',
-  observation: 'observation',
-  organizationId: 'organizationId'
-};
-
-exports.Prisma.SettingOrderByRelevanceFieldEnum = {
-  id: 'id',
-  name: 'name',
-  logo: 'logo',
-  organizationId: 'organizationId'
-};
-
-exports.Prisma.SaleOrderByRelevanceFieldEnum = {
-  id: 'id',
-  resumo_cnpj: 'resumo_cnpj',
-  resumo_codfil: 'resumo_codfil',
-  resumo_desfil: 'resumo_desfil',
-  resumo_datmvt: 'resumo_datmvt',
-  resumo_yearmonth: 'resumo_yearmonth',
-  resumo_valdev: 'resumo_valdev',
-  resumo_valven: 'resumo_valven',
-  resumo_margem: 'resumo_margem',
-  resumo_presen: 'resumo_presen',
-  resumo_metdia: 'resumo_metdia',
-  organizationId: 'organizationId'
-};
-
-exports.Prisma.AssociationOrderByRelevanceFieldEnum = {
-  id: 'id',
-  assoc_cnpj: 'assoc_cnpj',
-  assoc_filial: 'assoc_filial',
-  assoc_datmvt: 'assoc_datmvt',
-  assoc_ass: 'assoc_ass',
-  assoc_desass: 'assoc_desass',
-  assoc_valdev: 'assoc_valdev',
-  assoc_valven: 'assoc_valven',
-  assoc_margem: 'assoc_margem',
-  assoc_repres: 'assoc_repres',
-  assoc_metdia: 'assoc_metdia',
-  organizationId: 'organizationId'
-};
-
-exports.Prisma.TotalOrderByRelevanceFieldEnum = {
-  id: 'id',
-  total_cnpj: 'total_cnpj',
-  total_datatu: 'total_datatu',
-  total_filial: 'total_filial',
-  total_valdev: 'total_valdev',
-  total_valven: 'total_valven',
-  total_margem: 'total_margem',
-  total_permet: 'total_permet',
-  total_projec: 'total_projec',
-  total_valjur: 'total_valjur',
-  total_perjur: 'total_perjur',
-  total_valina: 'total_valina',
-  total_perina: 'total_perina',
-  total_valest: 'total_valest',
-  total_meta: 'total_meta',
-  organizationId: 'organizationId'
-};
-
 exports.Prisma.JsonNullValueFilter = {
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull,
@@ -353,15 +259,6 @@ exports.Prisma.JsonNullValueFilter = {
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
-};
-
-exports.Prisma.ActivityLogOrderByRelevanceFieldEnum = {
-  id: 'id',
-  action: 'action',
-  message: 'message',
-  organization: 'organization',
-  company: 'company',
-  organizationId: 'organizationId'
 };
 
 
