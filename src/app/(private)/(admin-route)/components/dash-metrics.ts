@@ -9,12 +9,11 @@ export async function getOrganization(): Promise<Organization[]> {
       'Content-Type': 'application/json',
     },
   });
-
-  if (!res.ok) {
-    throw new Error(`Erro ao listar organizações: ${res.status}`);
+  if (res.ok) {
+    return res.json();
+  } else {
+    return [];
   }
-
-  return res.json();
 }
 
 export async function getUser(): Promise<User[]> {
@@ -24,12 +23,11 @@ export async function getUser(): Promise<User[]> {
       'Content-Type': 'application/json',
     },
   });
-
-  if (!res.ok) {
-    throw new Error(`Erro ao listar usuários: ${res.status}`);
+  if (res.ok) {
+    return res.json();
+  } else {
+    return [];
   }
-
-  return res.json();
 }
 
 export async function getCompany(): Promise<Company[]> {
@@ -39,10 +37,9 @@ export async function getCompany(): Promise<Company[]> {
       'Content-Type': 'application/json',
     },
   });
-
-  if (!res.ok) {
-    throw new Error(`Erro ao listar fiiais: ${res.status}`);
+  if (res.ok) {
+    return res.json();
+  } else {
+    return [];
   }
-
-  return res.json();
 }

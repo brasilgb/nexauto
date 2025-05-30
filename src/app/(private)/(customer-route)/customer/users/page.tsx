@@ -34,18 +34,18 @@ async function getUsers({ org, com }: GetData): Promise<User[]> {
     })
   });
 
-  if (!res.ok) {
-    throw new Error(`Erro ao listar usuários: ${res.status}`);
+  if (res.ok) {
+    return res.json();
+  } else {
+    return [];
   }
-  return res.json();
 }
 
 export default async function Companies() {
   const session = await auth() as any;
   const params = { org: session?.user?.organizationId, com: session?.user?.companyId };
   const users = await getUsers(params);
-  console.log(session);
-  
+
   return (
     <div>
       <div className='flex items-center justify-between mb-6'>

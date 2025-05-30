@@ -11,9 +11,9 @@ export default async function Dashboard() {
 
   return (
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      <KpisDashboard title="Organizações" icone={<Building2 className="h-4 w-4 text-muted-foreground" />} value={organization.length} />
-      <KpisDashboard title="Filiais" icone={<Building className="h-4 w-4 text-muted-foreground" />} value={company.length} />
-      <KpisDashboard title="Usuários" icone={<User className="h-4 w-4 text-muted-foreground" />} value={user.length} />
+      <KpisDashboard title="Organizações" icone={<Building2 className="h-4 w-4 text-muted-foreground" />} value={organization?.length} />
+      <KpisDashboard title="Filiais" icone={<Building className="h-4 w-4 text-muted-foreground" />} value={company?.length} />
+      <KpisDashboard title="Usuários" icone={<User className="h-4 w-4 text-muted-foreground" />} value={user?.length} />
     </div>
   )
   

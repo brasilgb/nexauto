@@ -25,8 +25,11 @@ async function getSetting(organization: any): Promise<Setting[]> {
             organization: organization,
         }),
     });
-
+  if (res.ok) {
     return res.json();
+  }else{
+    return [];
+  }
 }
 
 export async function AppSidebar() {
@@ -76,7 +79,7 @@ export async function AppSidebar() {
                         > */}
                         <Link href="/customer">
                             <Image
-                                src={process.env.NEXT_PUBLIC_API_URL + `${settings?.logo ? settings?.logo : 'images/not-image.jpg'}`} alt={settings?.name}
+                                src={process.env.NEXT_PUBLIC_API_URL + `${settings?.logo ? settings?.logo : 'images/not-image.jpg'}`} alt={settings?.name?settings?.name:''}
                                 width={24}
                                 height={24}
                                 className="object-contain"

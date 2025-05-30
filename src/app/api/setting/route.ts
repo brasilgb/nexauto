@@ -5,6 +5,7 @@ export async function POST(req: Request) {
     const body = await req.json();
 
     const { organization } = body;
+console.log("Organization ID:", organization);
 
     try {
 

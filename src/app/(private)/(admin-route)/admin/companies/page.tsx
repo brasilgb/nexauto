@@ -19,10 +19,11 @@ async function getCompanies(): Promise<Company[]> {
     cache: 'no-store'
   });
 
-  if (!res.ok) {
-    throw new Error(`Erro ao listar filiais: ${res.status}`);
+  if (res.ok) {
+    return res.json();
+  } else {
+    return [];
   }
-  return res.json();
 }
 
 export default async function Companies() {

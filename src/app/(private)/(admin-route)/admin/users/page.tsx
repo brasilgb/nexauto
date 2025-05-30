@@ -18,11 +18,11 @@ async function getUsers(): Promise<User[]> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`, {
     cache: 'no-store'
   });
-
-  if (!res.ok) {
-    throw new Error(`Erro ao listar usuários: ${res.status}`);
+  if (res.ok) {
+    return res.json();
+  } else {
+    return [];
   }
-  return res.json();
 }
 
 export default async function Companies() {

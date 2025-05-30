@@ -19,11 +19,11 @@ async function getOrganizations(): Promise<Organization[]> {
     cache: 'no-store'
   });
 
-  if (!res.ok) {
-    throw new Error(`Erro ao listar organizações: ${res.status}`);
+   if (res.ok) {
+    return res.json();
+  } else {
+    return [];
   }
-
-  return res.json();
 };
 
 export default async function Organizations() {
